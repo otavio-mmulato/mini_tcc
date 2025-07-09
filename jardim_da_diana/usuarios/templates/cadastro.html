@@ -1,0 +1,30 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="icon" type="image/png" href="{% static 'diana.png' %}" sizes="180x180"/>
+</head>
+<body>
+
+
+    <center>
+        <div class="card-cadastro">
+            <h1><p class="cadastre-se">Cadastre-se</p></h1>
+            <form class="textField" action="{% url 'cadastro' %}" method="post" {% csrf_token %}>
+                <input class="username" type="text" placeholder="Username..." name="username">
+                <br><br>
+                <input class="email" type="email" placeholder="Email..." name="email">
+                <br><br>
+                <input class="senha" type="password" placeholder="Senha..." name="senha">
+                <br><br>
+                <input class="botao" type="submit" value="Cadastrar">
+                <br>
+            </form>
+        </div>
+    </center>
+
+</body>
+</html>
