@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate, login as login_django
+from django.contrib.auth import authenticate, login as login_django, logout
 from django.contrib.auth.decorators import login_required
 
 def cadastro(request):
@@ -31,6 +31,10 @@ def login(request):
             return redirect('/static/frontend/index.html')
         else:
             return render(request, 'login.html', {'erro': 'Usuário ou senha inválidos.'})
+
+def logout_view(request):   
+    logout(request)
+    return redirect('/auth/login/')
 
 @login_required(login_url='/auth/login/')
 def plataforma(request):
