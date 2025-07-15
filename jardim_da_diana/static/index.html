@@ -25,7 +25,6 @@
                 </button>
             </div>
         </div>
-
         <div class="hidden md:flex header-center-container">
             <div class="header-search-bar">
                 <div class="header-search-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
@@ -43,7 +42,6 @@
                 </ul>
             </nav>
         </div>
-
         <div class="hidden md:flex header-icons-container">
             <div class="relative group">
                 <img src="./img/img.perfil.png" alt="perfil" class="header-icon">
@@ -73,9 +71,9 @@
         </nav>
     </div>
 
-    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12">
+    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12 mb-16 md:mb-24">
         <h2 class="text-2xl md:text-3xl font-bold text-brand-brown mb-6 text-center md:text-left">Mais Vendidos</h2>
-        <div id="produtos-todos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 md:gap-8">
+        <div id="produtos-todos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
             <div class="bg-white rounded-xl shadow-md p-3 md:p-4 flex flex-col hover:shadow-xl transition-shadow duration-300">
                 <img src="https://i.imgur.com/bZ2A2dV.jpeg" alt="Produto Exemplo" class="w-full h-32 md:h-56 object-cover rounded-lg">
                 <p class="text-sm md:text-base text-gray-800 mt-3 flex-grow">Cesta de Girassóis Elegante</p>
@@ -89,23 +87,76 @@
             </div>
     </main>
 
-    <footer class="footer-base">
-        <div class="footer-column">
-            <img class="footer-logo" src="./img/diana_footer.png" alt="Logo Rodapé">
-        </div>
-        <div class="footer-column">
-            <img class="footer-socials" src="./img/redes_sociais.png" alt="Redes Sociais">
-            <hr class="footer-divider">
-            <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
-            <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
-            <img class="footer-company-logo" src="./img/logosemfundo.png" alt="Logo Empresa">
-        </div>
-        <div class="footer-column">
-            <p class="footer-payment-title">Formas de Pagamento</p>
-            <img class="footer-payment-img" src="./img/formadepagamento.png" alt="Formas de Pagamento">
-        </div>
-    </footer>
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl md:text-4xl font-bold text-brand-brown text-center mb-16">
+                Pensamentos dos clientes
+            </h2>
 
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12">
+
+                <div class="bg-card-bg rounded-lg shadow-md p-8 flex flex-col items-center text-center">
+                    <div class="mb-5">
+                        <span class="text-4xl font-serif text-brand-brown">”</span>
+                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+                    </div>
+
+                    <blockquote class="text-stone-700 italic flex-grow">
+                        "Queria agradecer por deixarem o aniversário da minha mãe mais especial. O buquê foi elogiado por todos! Trabalho impecável!"
+                    </blockquote>
+                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
+                        Marcela
+                    </cite>
+                </div>
+
+                <div class="bg-card-bg rounded-lg shadow-md p-8 flex flex-col items-center text-center">
+                    <div class="mb-5">
+                        <span class="text-4xl font-serif text-brand-brown">”</span>
+                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+                    </div>
+                    
+                    <blockquote class="text-stone-700 italic flex-grow">
+                        "Em um momento de dor, vocês entregaram mais do que flores. Entregaram acolhimento. Foi tudo feito com muito respeito. Muito obrigada."
+                    </blockquote>
+                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
+                        Raphael
+                    </cite>
+                </div>
+
+                <div class="bg-card-bg rounded-lg shadow-md p-8 flex flex-col items-center text-center">
+                    <div class="mb-5">
+                        <span class="text-4xl font-serif text-brand-brown">”</span>
+                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+                    </div>
+                    
+                    <blockquote class="text-stone-700 italic flex-grow">
+                        "Comprei um buquê pra minha namorada e ela chorou de emoção. Vocês não vendem só flores, vendem sentimentos! Parabéns pelo trabalho."
+                    </blockquote>
+                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
+                        Laura
+                    </cite>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-base">
+   <div class="footer-column">
+       <img class="footer-logo" src="./img/diana_footer.png" alt="Logo Rodapé">
+   </div>
+   <div class="footer-column">
+       <img class="footer-socials" src="./img/redes_sociais.png" alt="Redes Sociais">
+       <hr class="footer-divider bg-white">
+       <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
+       <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
+       <img class="footer-company-logo" src="./img/logosemfundo.png" alt="Logo Empresa">
+   </div>
+   <div class="footer-column">
+       <p class="footer-payment-title">Formas de Pagamento</p>
+       <img class="footer-payment-img" src="./img/formadepagamento.png" alt="Formas de Pagamento">
+   </div>
+</footer>
 
     <script>
         const hamburgerButton = document.getElementById('hamburger-button');

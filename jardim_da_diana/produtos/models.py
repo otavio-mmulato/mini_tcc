@@ -11,9 +11,10 @@ class Produto(models.Model):
     nome = models.CharField(max_length=100)
     descricao = models.TextField()
     preco = models.DecimalField(max_digits=10, decimal_places=2)
-    categoria = models.ForeignKey(Categoria, related_name='produtos', on_delete=models.CASCADE) #Se a categoria for excluída, os produtos associados também serão excluídos
-    ativo = models.BooleanField(default=True)
+    categoria = models.ForeignKey(Categoria, related_name='produtos', on_delete=models.CASCADE)
     imagem = models.ImageField(upload_to='produtos/', blank=True, null=True)
+    custo = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
+    lucro = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
     estoque = models.IntegerField(default=0)
 
     def __str__(self):
