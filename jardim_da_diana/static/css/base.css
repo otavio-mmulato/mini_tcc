@@ -1,87 +1,60 @@
-/* Importa as "ferramentas" do Tailwind para que o @apply funcione. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Aqui definimos nossos próprios componentes.
-  A diretiva @apply simplesmente agrupa um monte de classes do Tailwind
-  dentro de um único nome que criamos.
-*/
 @layer components {
 
-  /* --- Componentes do Cabeçalho --- */
-  .header-base {
-    @apply bg-[#F2B11D] h-auto md:h-[200px] flex flex-col md:flex-row items-center justify-between px-4 md:px-8 py-4 md:py-0 relative;
+  /* --- Componentes do Header --- */
+  .main-nav {
+    @apply bg-brand-yellow flex items-center justify-between px-8 py-2 shadow-md;
   }
-  .header-logo-container {
-    @apply flex-1 flex justify-start;
+  .nav-links {
+    @apply flex items-center gap-8;
   }
-  .header-logo-img {
-    @apply w-48 md:w-64;
+  .nav-link {
+    @apply text-sm font-bold uppercase tracking-wider text-header-text hover:text-opacity-75 transition-opacity;
   }
-  .header-center-container {
-    @apply w-full md:w-auto md:absolute md:left-1/2 md:-translate-x-1/2 md:top-8 flex flex-col items-center gap-4 md:gap-6 mt-4 md:mt-0;
+  .nav-search-bar {
+    @apply relative flex items-center;
   }
-  .header-search-bar {
-    @apply flex items-center bg-white py-2 pl-2 pr-4 rounded-full gap-2 w-full max-w-lg shadow-sm;
+  .nav-search-input {
+    @apply w-64 bg-white bg-opacity-80 rounded-full py-1.5 pl-4 pr-10 text-sm text-header-text placeholder-header-text placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-brand-brown;
   }
-  .header-search-icon {
-    @apply flex items-center justify-center rounded-full w-8 h-8 bg-[rgb(79,148,11)] text-white flex-shrink-0;
+  .nav-search-icon {
+    @apply absolute right-3 text-header-text;
   }
-  .header-search-input {
-    @apply w-full bg-transparent focus:outline-none text-base;
+  .nav-user-actions {
+    @apply flex items-center gap-4;
   }
-  .header-nav {
-    @apply w-full overflow-x-auto;
+  .nav-user-action {
+    @apply flex flex-col items-center text-xs font-bold text-header-text;
   }
-  .header-nav-list {
-    @apply flex justify-center gap-6 md:gap-10 whitespace-nowrap py-2;
-  }
-  .header-nav-link {
-    @apply text-black text-lg hover:text-[#2C641E] transition-colors duration-300 no-underline;
-  }
-  .header-icons-container {
-    @apply flex-1 flex justify-end items-center gap-4;
-  }
-  .header-icon {
-    @apply w-10 h-10 cursor-pointer;
-  }
-  .profile-menu-dropdown {
-    @apply absolute top-full right-0 mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-10 hidden group-hover:flex flex-col opacity-0 group-hover:opacity-100 transition-all duration-300;
-  }
-  .profile-menu-link {
-    @apply block px-4 py-2 text-gray-700 hover:bg-gray-100;
+  .nav-user-icon {
+    @apply w-8 h-8 rounded-full flex items-center justify-center;
   }
 
-  /* --- Componentes do Rodapé --- */
-  .footer-base {
-    @apply bg-[#F2B11D] mt-16 p-8 flex flex-col md:flex-row justify-between items-center text-center gap-8;
+  /* --- Componentes do Footer --- */
+  .footer-new {
+    @apply bg-brand-yellow mt-16 text-header-text;
   }
-  .footer-column {
-    @apply flex-1 flex flex-col items-center justify-center;
-  }
-  .footer-logo {
-    @apply max-h-48;
-  }
-  .footer-socials {
-    @apply h-10;
-  }
-  .footer-divider {
-    @apply w-3/5 my-2 h-px bg-gray-800 border-0;
-  }
-  .footer-address {
-    @apply text-sm;
+  .footer-main-content {
+    @apply max-w-7xl mx-auto flex items-center justify-between py-8 px-8;
   }
   .footer-copyright {
-    @apply text-xs;
+    @apply text-center text-sm;
   }
-  .footer-company-logo {
-    @apply h-16 mt-2;
+  .footer-social-icons {
+    @apply flex items-center justify-center gap-4 text-2xl;
   }
-  .footer-payment-title {
-    @apply text-xl mb-2;
+  .footer-payment-methods {
+    @apply flex items-center gap-3;
   }
-  .footer-payment-img {
-    @apply max-w-[250px];
-  }
+}
+/* Adicionando no final de base.css */
+.logo-header-container-height {
+  height: 4rem !important; /* 64px. O !important força a aplicação. */
+}
+
+.logo-footer-height {
+  height: 7rem !important; /* 112px. O !important força a aplicação. */
 }
