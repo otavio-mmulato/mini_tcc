@@ -1,89 +1,238 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* css/base.css - Estilos globais, Header e Footer */
 
-@layer components {
-
-  /* --- Componentes do Header --- */
-  .main-nav {
-    @apply bg-brand-yellow flex items-center justify-between px-8 py-2 shadow-md flex-wrap;
-  }
-  .nav-links {
-    @apply flex items-center gap-8;
-  }
-  .nav-link {
-    @apply text-sm font-bold uppercase tracking-wider text-header-text hover:text-opacity-75 transition-opacity;
-  }
-  .nav-search-bar {
-    @apply relative flex items-center;
-  }
-  .nav-search-input {
-    @apply w-64 bg-white bg-opacity-80 rounded-full py-1.5 pl-4 pr-10 text-sm text-header-text placeholder-header-text placeholder-opacity-70 focus:outline-none focus:ring-2 focus:ring-brand-brown;
-  }
-  .nav-search-icon {
-    @apply absolute right-3 text-header-text;
-  }
-  .nav-user-actions {
-    @apply flex items-center gap-4;
-  }
-  .nav-user-action {
-    @apply flex flex-col items-center text-xs font-bold text-header-text;
-  }
-  .nav-user-icon {
-    @apply w-8 h-8 rounded-full flex items-center justify-center;
-  }
-
-  /* --- Componentes do Footer --- */
-  .footer-new {
-    @apply bg-brand-yellow mt-16 text-header-text;
-  }
-  .footer-main-content {
-    @apply max-w-7xl mx-auto flex items-center justify-between py-8 px-8;
-  }
-  .footer-copyright {
-    @apply text-center text-sm;
-  }
-  .footer-social-icons {
-    @apply flex items-center justify-center gap-4 text-2xl;
-  }
-  .footer-payment-methods {
-    @apply flex items-center gap-3;
-  }
-
-  /* --- Ajustes Responsivos --- */
-  @media (max-width: 1024px) {
-    .main-nav {
-      @apply flex-wrap gap-4;
-    }
-    .nav-links {
-      @apply flex-wrap w-full justify-center text-center;
-    }
-    .nav-user-actions {
-      @apply justify-center w-full mt-2;
-    }
-    .nav-search-bar {
-      @apply w-full justify-center mt-2;
-    }
-    .nav-search-input {
-      @apply w-full max-w-xs;
-    }
-    .footer-main-content {
-      @apply flex-col gap-6 text-center items-center;
-    }
-  }
-
-  @media (max-width: 640px) {
-    .footer-payment-methods {
-      @apply justify-center flex-wrap;
-    }
-  }
+/* --- Variáveis Globais e Estilos Base --- */
+:root {
+  --font-serif: 'Times New Roman', Times, serif;
+  --color-brand-yellow: #F2B11D;
+  --color-brand-brown: #A07855;
+  --color-brand-green: #2C641E;
+  --color-brand-bg: #F8F5EF;
+  --color-card-bg: #FFFFFF;
+  --color-header-text: #3B2116;
 }
 
-/* Adicionando no final de base.css */
-.logo-header-container-height {
-  height: 4rem !important; /* 64px. O !important força a aplicação. */
+body {
+  font-family: var(--font-serif);
+  background-color: var(--color-brand-bg);
+  color: var(--color-header-text);
+  margin: 0;
+}
+
+/* --- Componentes do Header --- */
+.main-nav {
+  background-color: var(--color-brand-yellow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  flex-wrap: wrap;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.nav-link {
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-header-text);
+  text-decoration: none;
+  transition: color 200ms ease-in-out;
+}
+.nav-link:hover {
+  color: var(--color-brand-green);
+}
+
+.logo-header-height {
+  height: 4rem !important;
+}
+
+.nav-search-bar {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-search-input {
+  width: 16rem;
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 9999px;
+  padding: 0.375rem 2.5rem 0.375rem 1rem;
+  font-size: 0.875rem;
+  color: var(--color-header-text);
+  border: none;
+}
+.nav-search-input::placeholder {
+  color: var(--color-header-text);
+  opacity: 0.7;
+}
+.nav-search-input:focus {
+  outline: 2px solid var(--color-brand-brown);
+}
+
+.nav-search-icon {
+  position: absolute;
+  right: 0.75rem;
+  color: var(--color-header-text);
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-user-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Aumentado um pouco o gap */
+}
+
+.nav-user-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-header-text);
+  text-decoration: none;
+  transition: color 200ms ease-in-out;
+}
+.nav-user-action:hover {
+  color: var(--color-brand-green);
+}
+.nav-user-action .fa-solid {
+  font-size: 1.25rem;
+}
+
+/* --- Componentes do Footer --- */
+.footer-new {
+  background-color: var(--color-brand-yellow);
+  margin-top: 4rem;
+  color: var(--color-header-text);
+  padding: 2rem 2rem;
+}
+
+.footer-grid {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    gap: 2rem;
+}
+
+.footer-logo-container {
+    display: flex;
+    justify-content: flex-start;
 }
 
 .logo-footer-height {
-  height: 7rem !important; /* 112px. O !important força a aplicação. */
+  height: 9rem !important;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-social-icons a {
+    color: var(--color-header-text);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+}
+.footer-social-icons a:hover {
+    color: var(--color-brand-green);
+}
+
+.footer-address {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.footer-copyright {
+    font-size: 0.875rem;
+}
+
+.footer-seal {
+    height: 2rem;
+    margin: 0.75rem auto 0 auto;
+}
+
+.footer-payment {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-payment-title {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.payment-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem 0.25rem;
+    width: 100%;
+    max-width: 200px;
+}
+
+.payment-icon-wrapper {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-icon { object-fit: contain; }
+.payment-icon.mastercard { height: 1.5rem; }
+.payment-icon.visa { height: 1.25rem; }
+.payment-icon.amex { height: 1.5rem; }
+.payment-icon.elo { height: 1.25rem; }
+.payment-icon.hipercard { height: 2rem; }
+.payment-icon.paypal { height: 1.5rem; }
+
+/* --- Responsividade (Base, Header e Footer) --- */
+@media (max-width: 1024px) {
+  .main-nav, .nav-links {
+    gap: 1rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .nav-user-actions {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .nav-search-bar {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .nav-search-input {
+    width: 100%;
+    max-width: 20rem;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .footer-logo-container, .footer-payment {
+    justify-content: center;
+  }
 }

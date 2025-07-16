@@ -1,0 +1,163 @@
+/* css/base.css - Estilos globais, Header e Footer */
+
+/* --- Variáveis Globais e Estilos Base --- */
+:root {
+  --font-serif: 'Times New Roman', Times, serif;
+  --color-brand-yellow: #F2B11D;
+  --color-brand-brown: #A07855;
+  --color-brand-green: #2C641E;
+  --color-brand-bg: #F8F5EF;
+  --color-card-bg: #FFFFFF;
+  --color-header-text: #3B2116;
+}
+
+body {
+  font-family: var(--font-serif);
+  background-color: var(--color-brand-bg);
+  color: var(--color-header-text);
+  margin: 0;
+}
+
+/* --- Componentes do Header --- */
+.main-nav {
+  background-color: var(--color-brand-yellow);
+  display: flex;
+  justify-content: center; /* CENTRALIZA horizontalmente */
+  align-items: center;     /* CENTRALIZA verticalmente */
+  height: 6rem;            /* Ajuste a altura como preferir */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-header-height {
+  height: 4.5rem; /* ajuste conforme a imagem */
+}
+
+/* --- Componentes do Footer --- */
+.footer-new {
+  background-color: var(--color-brand-yellow);
+  margin-top: 4rem;
+  color: var(--color-header-text);
+  padding: 2rem 2rem;
+}
+
+.footer-grid {
+    max-width: 80rem;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: start;
+    gap: 2rem;
+}
+
+.footer-logo-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.logo-footer-height {
+  height: 9rem !important;
+}
+
+.footer-center {
+    text-align: center;
+}
+
+.footer-social-icons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.footer-social-icons a {
+    color: var(--color-header-text);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+}
+.footer-social-icons a:hover {
+    color: var(--color-brand-green);
+}
+
+.footer-address {
+    font-size: 1rem;
+    margin-bottom: 0.25rem;
+}
+
+.footer-copyright {
+    font-size: 0.875rem;
+}
+
+.footer-seal {
+    height: 2rem;
+    margin: 0.75rem auto 0 auto;
+}
+
+.footer-payment {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.footer-payment-title {
+    font-weight: 700;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.payment-icons-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem 0.25rem;
+    width: 100%;
+    max-width: 200px;
+}
+
+.payment-icon-wrapper {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.payment-icon { object-fit: contain; }
+.payment-icon.mastercard { height: 1.5rem; }
+.payment-icon.visa { height: 1.25rem; }
+.payment-icon.amex { height: 1.5rem; }
+.payment-icon.elo { height: 1.25rem; }
+.payment-icon.hipercard { height: 2rem; }
+.payment-icon.paypal { height: 1.5rem; }
+
+/* --- Responsividade (Base, Header e Footer) --- */
+@media (max-width: 1024px) {
+  .main-nav, .nav-links {
+    gap: 1rem;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+  .nav-user-actions {
+    justify-content: center;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+  .nav-search-bar {
+    width: 100%;
+    justify-content: center;
+    margin-top: 0.5rem;
+  }
+  .nav-search-input {
+    width: 100%;
+    max-width: 20rem;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    text-align: center;
+  }
+  .footer-logo-container, .footer-payment {
+    justify-content: center;
+  }
+}

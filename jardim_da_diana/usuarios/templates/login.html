@@ -1,116 +1,79 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardim da Diana - Login</title>
-
-    <link rel="stylesheet" href="/jardim_da_diana/static/css/output.css">
+    <title>Jardim da Diana</title>
+    
+    <link rel="stylesheet" href="/jardim_da_diana/static/css/base.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="icon" type="image/png" href="/jardim_da_diana/static/logo.png" sizes="180x180"/>
+    <link rel="icon" type="image/png" href="/jardim_da_diana/static/css/diana.png" sizes="180x180"/>
 </head>
-<body class="font-serif bg-brand-bg min-h-screen flex flex-col">
 
-    <!-- HEADER -->
     <header>
         <nav class="main-nav">
-            <div class="nav-links">
-                <a href="/"><img src="/jardim_da_diana/static/logo.png" alt="Logo Jardim da Diana" class="w-auto" style="height: 4rem !important;"></a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Presente</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Cestas</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Buquês</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Flores</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Itens de Jardinagem</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Suculentas</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Sobre Nós</a>
-            </div>
-
-            <div class="flex items-center gap-6">
-                <div class="nav-search-bar">
-                    <input type="text" placeholder="Buscar item..." class="nav-search-input">
-                    <button class="nav-search-icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
-                <div class="nav-user-actions">
-                    <a href="#" class="nav-user-action hover:text-brand-green transition-colors duration-200">
-                        <div class="nav-user-icon">
-                            <i class="fa-solid fa-user text-xl"></i>
-                        </div>
-                        <span>PERFIL</span>
-                    </a>
-                    <a href="#" class="nav-user-action hover:text-brand-green transition-colors duration-200">
-                        <div class="nav-user-icon">
-                            <i class="fa-solid fa-shopping-bag text-xl"></i>
-                        </div>
-                        <span>SACOLA</span>
-                    </a>
-                </div>
-            </div>
+            <a href="#"><img src="/jardim_da_diana/static/logo.png" alt="Logo Jardim da Diana" class="logo-header-height"></a>
         </nav>
     </header>
 
-    <!-- LOGIN -->
-    <main class="flex-grow flex justify-center items-center px-4 py-12">
-        <div class="bg-white rounded-xl shadow-md p-8 w-full max-w-md">
-            <h1 class="text-2xl md:text-3xl font-bold text-brand-brown mb-6 text-center">Login</h1>
 
-            <form action="{% url 'login' %}" method="post" class="space-y-5"> {% csrf_token %}
-                <input type="text" name="username" placeholder="Usuário..." required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green">
-                <input type="password" name="password" placeholder="Senha..." required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand-green">
-                <input type="submit" value="Entrar" class="w-full bg-brand-green text-white font-semibold py-2 rounded-lg hover:bg-green-700 transition-colors duration-200">
 
-                <div class="text-center mt-4 text-sm text-gray-700">
-                    <p>Não tem cadastro? <a href="{% url 'cadastro' %}" class="text-brand-green font-semibold hover:underline">Cadastre-se!</a></p>
-                </div>
-            </form>
-        </div>
+    <main>
+        <center>
+            <div class="card-login">
+                <h1>Login</h1>
+
+                <form class="textField" action="{% url 'login' %}" method="post"> {% csrf_token %}
+                    <input class="usuarioLogin" type="text" placeholder="Username..." name="username" required>
+                    <br><br>
+
+                    <input class="senhaLogin" type="password" placeholder="Senha..." name="password" required>
+                    <br><br>
+
+                    <input class="botaoLogin" type="submit" value="Entrar">
+                    <br>
+
+                    <div class="cd">
+                        <p>Não tem cadastro?</p>
+                        <a href="{% url 'cadastro' %}" class="cadastre">Cadastre-se!</a>
+                    </div>
+                </form>
+            </div>
+        </center>
     </main>
-
-    <!-- FOOTER -->
-    <footer class="footer-new mt-16">
-        <div class="max-w-7xl mx-auto grid grid-cols-3 items-start gap-8 py-8 px-8">
-            <div class="flex justify-start">
-                <img src="/jardim_da_diana/static/logo.png" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height w-auto">
+    
+    <footer class="footer-new">
+        <div class="footer-grid">
+            <div class="footer-logo-container">
+                <img src="/jardim_da_diana/static/logo.png" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height footer-logo-down">
             </div>
-            <div class="text-center">
-                <div class="footer-social-icons mb-3">
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-whatsapp"></i></a>
+            <div class="footer-center">
+                <div class="footer-social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
-                <p class="text-base mb-1">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
-                <p class="text-sm">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
-                <img src="{% static 'frontend/src/logosemfundo.png' %}" alt="Selo de Segurança" class="h-8 mx-auto mt-3">
+                <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
+                <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
+                <img src="/jardim_da_diana/static/logosemfundo.png" alt="Selo de Segurança" class="footer-seal">
             </div>
-            <div class="flex justify-end">
+            <div class="footer-payment">
                 <div>
-                    <h3 class="font-bold mb-3 text-center">Formas de pagamento</h3>
-                    <div class="grid grid-cols-3 gap-x-2 gap-y-1 w-full max-w-[200px]">
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="h-6 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-5 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_(2018).svg" alt="American Express" class="h-6 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo" class="h-5 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard" class="h-8 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6 object-contain">
-                        </div>
+                    <h3 class="footer-payment-title">Formas de pagamento</h3>
+                    <div class="payment-icons-grid">
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon mastercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon visa"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_(2018).svg" alt="American Express" class="payment-icon amex"></div>
+                        <div class="payment-icon-wrapper"><img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo" class="payment-icon elo"></div>
+                        <div class="payment-icon-wrapper"><img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard" class="payment-icon hipercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-icon paypal"></div>
                     </div>
                 </div>
             </div>
         </div>
     </footer>
+
 </body>
 </html>

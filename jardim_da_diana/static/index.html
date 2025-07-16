@@ -5,152 +5,126 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jardim da Diana</title>
     
-    <link rel="stylesheet" href="./css/output.css">
+    <link rel="stylesheet" href="./css/base.css">
+    <link rel="stylesheet" href="./css/home.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
     <link rel="icon" type="image/png" href="./diana.png" sizes="180x180"/>
 </head>
-<body class="font-serif bg-brand-bg">
+<body>
 
     <header>
         <nav class="main-nav">
             <div class="nav-links">
-                <a href="#"><img src="./logo.png" alt="Logo Jardim da Diana" class="w-auto" style="height: 4rem !important;"></a>
-                
-                
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Presente</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Cestas</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Buquês</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Flores</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Itens de Jardinagem</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Suculentas</a>
-                <a href="#" class="nav-link hover:text-brand-green transition-colors duration-200">Sobre Nós</a>
+                <a href="#"><img src="./logo.png" alt="Logo Jardim da Diana" class="logo-header-height"></a>
+                <a href="#" class="nav-link">Presente</a>
+                <a href="#" class="nav-link">Cestas</a>
+                <a href="#" class="nav-link">Buquês</a>
+                <a href="#" class="nav-link">Flores</a>
+                <a href="#" class="nav-link">Itens de Jardinagem</a>
+                <a href="#" class="nav-link">Suculentas</a>
+                <a href="#" class="nav-link">Sobre Nós</a>
             </div>
             
-            <div class="flex items-center gap-6">
+            <div class="nav-user-actions">
                 <div class="nav-search-bar">
                     <input type="text" placeholder="Buscar item..." class="nav-search-input">
                     <button class="nav-search-icon">
                         <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                 </div>
-                <div class="nav-user-actions">
-                    <a href="#" class="nav-user-action hover:text-brand-green transition-colors duration-200">
-                        <div class="nav-user-icon">
-                            <i class="fa-solid fa-user text-xl"></i>
-                        </div>
-                        <span>PERFIL</span>
-                    </a>
-                    <a href="#" class="nav-user-action hover:text-brand-green transition-colors duration-200">
-                        <div class="nav-user-icon">
-                            <i class="fa-solid fa-shopping-bag text-xl"></i>
-                        </div>
-                        <span>SACOLA</span>
-                    </a>
-                </div>
+                <a href="#" class="nav-user-action">
+                    <i class="fa-solid fa-user"></i>
+                    <span>PERFIL</span>
+                </a>
+                <a href="#" class="nav-user-action">
+                    <i class="fa-solid fa-shopping-bag"></i>
+                    <span>SACOLA</span>
+                </a>
             </div>
         </nav>
     </header>
 
-    <main class="max-w-7xl mx-auto px-4 py-8 md:py-12 mb-16 md:mb-24">
-        <h2 class="text-2xl md:text-3xl font-bold text-brand-brown mb-6 text-center md:text-left">Mais Vendidos</h2>
-        <div id="produtos-todos" class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 md:gap-8">
-            <div class="bg-white rounded-xl shadow-md p-3 md:p-4 flex flex-col hover:shadow-xl transition-shadow duration-300">
-                <img src="https://i.imgur.com/bZ2A2dV.jpeg" alt="Produto Exemplo" class="w-full h-32 md:h-56 object-cover rounded-lg">
-                <p class="text-sm md:text-base text-gray-800 mt-3 flex-grow">Cesta de Girassóis Elegante</p>
-                <span class="font-bold text-base md:text-lg text-[#80786C] mt-1">R$ 189,90</span>
+    <main class="main-container">
+        <h2 class="section-title">Mais Vendidos</h2>
+        <div id="produtos-todos" class="products-grid">
+            <div class="product-card">
+                <img src="https://i.imgur.com/bZ2A2dV.jpeg" alt="Cesta de Girassóis">
+                <p>Cesta de Girassóis Elegante</p>
+                <span class="price">R$ 189,90</span>
             </div>
-            <div class="bg-white rounded-xl shadow-md p-3 md:p-4 flex flex-col hover:shadow-xl transition-shadow duration-300">
-                <img src="https://i.imgur.com/qR1H3gP.jpeg" alt="Produto Exemplo" class="w-full h-32 md:h-56 object-cover rounded-lg">
-                <p class="text-sm md:text-base text-gray-800 mt-3 flex-grow">Buquê de Rosas Vermelhas</p>
-                <span class="font-bold text-base md:text-lg text-[#80786C] mt-1">R$ 129,90</span>
+            <div class="product-card">
+                <img src="https://i.imgur.com/qR1H3gP.jpeg" alt="Buquê de Rosas">
+                <p>Buquê de Rosas Vermelhas</p>
+                <span class="price">R$ 129,90</span>
             </div>
         </div>
     </main>
 
-    <section class="py-16">
-        <div class="max-w-7xl mx-auto px-4">
-            <h2 class="text-3xl md:text-4xl font-bold text-brand-brown text-center mb-16">
-                Pensamentos dos clientes
-            </h2>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-y-16 md:gap-x-12">
-                <div class="bg-white rounded-lg shadow-md p-8 flex flex-col items-center text-center">
-                    <div class="mb-5">
-                        <span class="text-4xl font-serif text-brand-brown">”</span>
-                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <h2 class="testimonials-title">Pensamentos dos clientes</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div>
+                        <span class="testimonial-quote-symbol">”</span>
+                        <div class="testimonial-divider"></div>
                     </div>
-                    <blockquote class="text-stone-700 italic flex-grow">
+                    <blockquote>
                         "Queria agradecer por deixarem o aniversário da minha mãe mais especial. O buquê foi elogiado por todos! Trabalho impecável!"
                     </blockquote>
-                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
-                        Marcela
-                    </cite>
+                    <cite>Marcela</cite>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-8 flex flex-col items-center text-center">
-                    <div class="mb-5">
-                        <span class="text-4xl font-serif text-brand-brown">”</span>
-                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+                <div class="testimonial-card">
+                    <div>
+                        <span class="testimonial-quote-symbol">”</span>
+                        <div class="testimonial-divider"></div>
                     </div>
-                    <blockquote class="text-stone-700 italic flex-grow">
+                    <blockquote>
                         "Em um momento de dor, vocês entregaram mais do que flores. Entregaram acolhimento. Foi tudo feito com muito respeito. Muito obrigada."
                     </blockquote>
-                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
-                        Raphael
-                    </cite>
+                    <cite>Raphael</cite>
                 </div>
-                <div class="bg-white rounded-lg shadow-md p-8 flex flex-col items-center text-center">
-                    <div class="mb-5">
-                        <span class="text-4xl font-serif text-brand-brown">”</span>
-                        <div class="w-10 h-px bg-brand-brown mx-auto"></div>
+                <div class="testimonial-card">
+                    <div>
+                        <span class="testimonial-quote-symbol">”</span>
+                        <div class="testimonial-divider"></div>
                     </div>
-                    <blockquote class="text-stone-700 italic flex-grow">
+                    <blockquote>
                         "Comprei um buquê pra minha namorada e ela chorou de emoção. Vocês não vendem só flores, vendem sentimentos! Parabéns pelo trabalho."
                     </blockquote>
-                    <cite class="mt-5 not-italic block font-bold text-lg text-brand-brown">
-                        Laura
-                    </cite>
+                    <cite>Laura</cite>
                 </div>
             </div>
         </div>
     </section>
     
     <footer class="footer-new">
-        <div class="max-w-7xl mx-auto grid grid-cols-3 items-start gap-8 py-8 px-8">
-            <div class="flex justify-start">
-                <img src="./logo.png" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height w-auto">
+        <div class="footer-grid">
+            <div class="footer-logo-container">
+                <img src="./logo.png" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height">
             </div>
-            <div class="text-center">
-                <div class="footer-social-icons mb-3">
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-instagram"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="#" class="hover:text-brand-green transition-colors duration-200"><i class="fa-brands fa-whatsapp"></i></a>
+            <div class="footer-center">
+                <div class="footer-social-icons">
+                    <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
-                <p class="text-base mb-1">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
-                <p class="text-sm">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
-                <img src="./logosemfundo.png" alt="Selo de Segurança" class="h-8 mx-auto mt-3">
+                <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
+                <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
+                <img src="./logosemfundo.png" alt="Selo de Segurança" class="footer-seal">
             </div>
-            <div class="flex justify-end">
+            <div class="footer-payment">
                 <div>
-                    <h3 class="font-bold mb-3 text-center">Formas de pagamento</h3>
-                    <div class="grid grid-cols-3 gap-x-2 gap-y-1 w-full max-w-[200px]">
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="h-6 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="h-5 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                             <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_(2018).svg" alt="American Express" class="h-6 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo" class="h-5 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard" class="h-8 object-contain">
-                        </div>
-                        <div class="h-8 flex items-center justify-center">
-                            <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="h-6 object-contain">
-                        </div>
+                    <h3 class="footer-payment-title">Formas de pagamento</h3>
+                    <div class="payment-icons-grid">
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon mastercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon visa"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_(2018).svg" alt="American Express" class="payment-icon amex"></div>
+                        <div class="payment-icon-wrapper"><img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo" class="payment-icon elo"></div>
+                        <div class="payment-icon-wrapper"><img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard" class="payment-icon hipercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-icon paypal"></div>
                     </div>
                 </div>
             </div>

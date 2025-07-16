@@ -1,0 +1,176 @@
+/* css/home.css - Estilos específicos da página inicial */
+
+/* --- Variáveis de Cor (se necessário, mas idealmente herdadas do base) --- */
+:root {
+  --color-gray-800: #1f2937;
+  --color-stone-700: #44403c;
+}
+
+/* --- Container Principal e Títulos de Seção --- */
+.main-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 2rem 1rem 4rem 1rem;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-brand-brown);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+/* --- Grid de Produtos --- */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.product-card {
+  background-color: var(--color-card-bg);
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  transition: box-shadow 300ms ease-in-out;
+}
+.product-card:hover {
+  box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.product-card img {
+  width: 100%;
+  height: 8rem;
+  object-fit: cover;
+  border-radius: 0.5rem;
+}
+
+.product-card p {
+  font-size: 0.875rem;
+  color: var(--color-gray-800);
+  margin-top: 0.75rem;
+  flex-grow: 1;
+}
+
+.product-card .price {
+  font-weight: 700;
+  font-size: 1rem;
+  color: #80786C;
+  margin-top: 0.25rem;
+}
+
+/* --- Seção de Depoimentos --- */
+.testimonials-section {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.testimonials-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.testimonials-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--color-brand-brown);
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+}
+
+.testimonial-card {
+  background-color: var(--color-card-bg);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.testimonial-quote-symbol {
+  font-size: 2.25rem;
+  font-family: var(--font-serif);
+  color: var(--color-brand-brown);
+}
+
+.testimonial-divider {
+  width: 2.5rem;
+  height: 1px;
+  background-color: var(--color-brand-brown);
+  margin: 0 auto 1.25rem auto;
+}
+
+.testimonial-card blockquote {
+  color: var(--color-stone-700);
+  font-style: italic;
+  flex-grow: 1;
+}
+
+.testimonial-card cite {
+  margin-top: 1.25rem;
+  font-style: normal;
+  display: block;
+  font-weight: 700;
+  font-size: 1.125rem;
+  color: var(--color-brand-brown);
+}
+
+/* --- Responsividade (Home) --- */
+@media (min-width: 768px) { /* md */
+    .main-container {
+        padding-top: 3rem;
+        padding-bottom: 3rem;
+        margin-bottom: 6rem;
+    }
+    .section-title {
+        font-size: 1.875rem;
+        text-align: left;
+    }
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .product-card {
+        padding: 1rem;
+    }
+    .product-card img {
+        height: 14rem;
+    }
+    .product-card p {
+        font-size: 1rem;
+    }
+    .product-card .price {
+        font-size: 1.125rem;
+    }
+    .testimonials-title {
+        font-size: 2.25rem;
+    }
+    .testimonials-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 3rem;
+    }
+}
+
+@media (min-width: 1024px) { /* lg */
+    .products-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (min-width: 1280px) { /* xl */
+    .products-grid {
+        grid-template-columns: repeat(5, 1fr);
+    }
+}
