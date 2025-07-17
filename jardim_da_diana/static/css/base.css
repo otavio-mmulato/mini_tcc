@@ -115,12 +115,14 @@ body {
   padding: 2rem 2rem;
 }
 
+/* Em css/base.css */
+
 .footer-grid {
     max-width: 80rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: start;
+    align-items: center; /* <<< ALTERE PARA 'center' */
     gap: 2rem;
 }
 
@@ -164,7 +166,7 @@ body {
 }
 
 .footer-seal {
-    height: 2rem;
+    height: 3rem;
     margin: 0.75rem auto 0 auto;
 }
 

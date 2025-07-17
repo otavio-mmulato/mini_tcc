@@ -22,14 +22,14 @@ body {
 .main-nav {
   background-color: var(--color-brand-yellow);
   display: flex;
-  justify-content: center; /* CENTRALIZA horizontalmente */
-  align-items: center;     /* CENTRALIZA verticalmente */
-  height: 6rem;            /* Ajuste a altura como preferir */
+  justify-content: center; /* <<< ALTERE ESTA LINHA */
+  align-items: center;
+  height: 6rem;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .logo-header-height {
-  height: 4.5rem; /* ajuste conforme a imagem */
+  height: 4.5rem !important; /* ajuste conforme a imagem */
 }
 
 /* --- Componentes do Footer --- */
@@ -40,12 +40,14 @@ body {
   padding: 2rem 2rem;
 }
 
+/* Em css/base.css */
+
 .footer-grid {
     max-width: 80rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: start;
+    align-items: center; /* <<< ALTERE PARA 'center' */
     gap: 2rem;
 }
 
@@ -89,7 +91,7 @@ body {
 }
 
 .footer-seal {
-    height: 2rem;
+    height: 3rem;
     margin: 0.75rem auto 0 auto;
 }
 

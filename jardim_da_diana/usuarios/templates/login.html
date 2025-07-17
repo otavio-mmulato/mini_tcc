@@ -1,42 +1,43 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jardim da Diana</title>
-    
-    <link rel="stylesheet" href="/jardim_da_diana/static/css/base.css">
-    
+    <title>Faça login no Jardim da Diana</title>
+    <link rel="stylesheet" href="{% static 'css/base_usuarios.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    <link rel="icon" type="image/png" href="/jardim_da_diana/static/css/diana.png" sizes="180x180"/>
+    <link rel="icon" type="image/png" href="{% static 'src/diana.png' %}" sizes="180x180"/>
+
 </head>
 
+<body>
     <header>
         <nav class="main-nav">
-            <a href="#"><img src="/jardim_da_diana/static/logo.png" alt="Logo Jardim da Diana" class="logo-header-height"></a>
+            <a href="#"><img src="{% static 'src/logo.png' %}" alt="Logo Jardim da Diana" class="logo-header-height main"></a>
         </nav>
     </header>
-
-
 
     <main>
         <center>
             <div class="card-login">
                 <h1>Login</h1>
 
-                <form class="textField" action="{% url 'login' %}" method="post"> {% csrf_token %}
+                <form class="textField" action="{% url 'login' %}" method="post">
+                    {% csrf_token %}
                     <input class="usuarioLogin" type="text" placeholder="Username..." name="username" required>
                     <br><br>
 
-                    <input class="senhaLogin" type="password" placeholder="Senha..." name="password" required>
+                    <input class="password-login" type="password" placeholder="Senha..." name="password" required>
                     <br><br>
 
-                    <input class="botaoLogin" type="submit" value="Entrar">
+                    <input class="button-login" type="submit" value="Entrar">
                     <br>
 
-                    <div class="cd">
-                        <p>Não tem cadastro?</p>
-                        <a href="{% url 'cadastro' %}" class="cadastre">Cadastre-se!</a>
+                    <div class="container-singup">
+                        <span>Novo no Jardim da Diana?</span>
+                        <a href="{% url 'cadastro' %}" class="cadastre">Criar uma conta</a>
                     </div>
                 </form>
             </div>
@@ -46,7 +47,7 @@
     <footer class="footer-new">
         <div class="footer-grid">
             <div class="footer-logo-container">
-                <img src="/jardim_da_diana/static/logo.png" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height footer-logo-down">
+                <img src="{% static 'src/logo.png' %}" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height footer-logo-down">
             </div>
             <div class="footer-center">
                 <div class="footer-social-icons">
@@ -57,7 +58,7 @@
                 </div>
                 <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
                 <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
-                <img src="/jardim_da_diana/static/logosemfundo.png" alt="Selo de Segurança" class="footer-seal">
+                <img src="{% static 'src/ophidiana.png' %}" alt="Selo de Segurança" class="footer-seal">
             </div>
             <div class="footer-payment">
                 <div>
@@ -74,6 +75,5 @@
             </div>
         </div>
     </footer>
-
 </body>
 </html>

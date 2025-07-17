@@ -1,0 +1,86 @@
+
+
+/* Cartão de login */
+.card-login {
+    background-color: #fff;
+    padding: 40px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+    margin: 70px auto;
+}
+
+.card-login > h1 {
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+    color: #333;
+}
+
+/* Campos de texto */
+.textField {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Alinha tudo ao centro */
+    justify-content: center;
+    width: 100%;
+    margin: 10px 0;
+}
+.textField > input {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.15);
+    outline: none;
+    transition: box-shadow 0.2s ease;
+    margin-top: 8px;
+}
+
+.textField > input:focus {
+    box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.25);
+}
+
+
+/* Botão de login */
+.button-login {
+    background-color: #4f940b;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.button-login:hover {
+    background-color: #3e7909;
+}
+
+/* Container de cadastro */
+.container-singup {
+  display: flex;
+  flex-direction: row; /* Coloca os itens lado a lado */
+  justify-content: center;
+  align-items: center;
+  gap: 5px; /* Espaço entre os textos */
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #333;
+}
+
+
+/* Link de cadastro */
+.cadastre {
+    color: #f2b11d;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.cadastre:hover {
+    text-decoration: underline;
+}

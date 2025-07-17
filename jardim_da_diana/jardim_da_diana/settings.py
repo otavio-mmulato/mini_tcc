@@ -16,6 +16,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (favicon, CSS, JS, imagens)
 STATIC_URL = '/static/'
+import os
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
