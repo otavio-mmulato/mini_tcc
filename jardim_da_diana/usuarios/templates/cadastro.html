@@ -4,27 +4,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastro</title>
-    <link rel="icon" type="image/png" href="{% static 'diana.png' %}" sizes="180x180"/>
+    <title>Inscreva-se - Jardim da Diana</title>
+    
+    <link rel="stylesheet" href="{% static 'css/base_usuarios.css' %}">
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Lora&family=Poppins&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="{% static 'src/diana.png' %}" sizes="180x180"/>
 </head>
+
 <body>
+    <header>
+        <nav class="main-nav">
+            <a href="#"><img src="{% static 'src/logo.png' %}" alt="Logo Jardim da Diana" class="logo-header-height main"></a>
+        </nav>
+    </header>
 
+    <main class="main-container">
+        <div class="card-signup">
+            <h1>Inscreva-se</h1>
 
-    <center>
-        <div class="card-cadastro">
-            <h1><p class="cadastre-se">Cadastre-se</p></h1>
-            <form class="textField" action="{% url 'cadastro' %}" method="post" {% csrf_token %}>
-                <input class="username" type="text" placeholder="Username..." name="username">
-                <br><br>
-                <input class="email" type="email" placeholder="Email..." name="email">
-                <br><br>
-                <input class="senha" type="password" placeholder="Senha..." name="senha">
-                <br><br>
-                <input class="botao" type="submit" value="Cadastrar">
-                <br>
+            {% if messages %}
+                <div class="messages-container">
+                {% for message in messages %}
+                    <div class="message {{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+                </div>
+            {% endif %}
+
+            <form class="signup-form" action="{% url 'cadastro' %}" method="post">
+                {% csrf_token %}
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input id="username" type="text" placeholder="Digite seu nome de usuário" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input id="email" type="email" placeholder="seuemail@exemplo.com" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Senha</label>
+                    <input id="password" type="password" placeholder="Crie uma senha forte" name="password" required>
+                </div>
+
+                <button class="button-signup" type="submit">Cadastrar</button>
+
+                <div class="login-prompt">
+                    <span>Possui cadastro?</span>
+                    <a href="{% url 'login' %}" class="login-link">Entre aqui</a>
+                </div>
             </form>
         </div>
-    </center>
-
+    </main>
+    
+    <footer class="footer-new">
+        <div class="footer-grid">
+            <div class="footer-logo-container">
+                <img src="{% static 'src/logo.png' %}" alt="Logo Rodapé Jardim da Diana" class="logo-footer-height footer-logo-down">
+            </div>
+            <div class="footer-center">
+                <div class="footer-social-icons">
+                    <a href="https://www.instagram.com/jardim_da_diana/"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="https://x.com/jardim_da_diana"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://wa.me/5515981327065?text=Ol%C3%A1%2C%20estava%20testando%20o%20seu%20mini%20TCC%20%3A)"><i class="fa-brands fa-whatsapp"></i></a>
+                </div>
+                <p class="footer-address">Praça Roberto Mange, R. Santa Rosália, 30, Sorocaba - SP, 18090-110</p>
+                <p class="footer-copyright">Copyright © 2025 Jardim da Diana - Todos os direitos reservados.</p>
+                <img src="{% static 'src/ophidiana.png' %}" alt="Selo de Segurança" class="footer-seal">
+            </div>
+            <div class="footer-payment">
+                <div>
+                    <h3 class="footer-payment-title">Formas de pagamento</h3>
+                    <div class="payment-icons-grid">
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Mastercard_2019_logo.svg" alt="Mastercard" class="payment-icon mastercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" class="payment-icon visa"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/American_Express_logo_(2018).svg" alt="American Express" class="payment-icon amex"></div>
+                        <div class="payment-icon-wrapper"><img src="https://cdn.worldvectorlogo.com/logos/elo-1.svg" alt="Elo" class="payment-icon elo"></div>
+                        <div class="payment-icon-wrapper"><img src="https://logospng.org/download/hipercard/logo-hipercard-1024.png" alt="Hipercard" class="payment-icon hipercard"></div>
+                        <div class="payment-icon-wrapper"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal" class="payment-icon paypal"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
 </body>
 </html>

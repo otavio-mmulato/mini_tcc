@@ -20,8 +20,8 @@ body {
     padding: 40px 20px;
 }
 
-/* --- Card de Login --- */
-.card-login {
+/* --- Card de Inscrição --- */
+.card-signup {
     background-color: #ffffff;
     padding: 30px 40px;
     border-radius: 15px;
@@ -32,7 +32,7 @@ body {
     box-sizing: border-box;
 }
 
-.card-login > h1 {
+.card-signup > h1 {
     margin-top: 0;
     margin-bottom: 25px;
     font-size: 2rem;
@@ -71,7 +71,7 @@ body {
 }
 
 /* --- Formulário --- */
-.login-form {
+.signup-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -114,7 +114,7 @@ body {
 }
 
 /* --- Botão e Link --- */
-.button-login {
+.button-signup {
     background-color: #6a994e;
     color: white;
     border: none;
@@ -128,11 +128,11 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.button-login:hover {
+.button-signup:hover {
     background-color: #5a8342;
 }
 
-.signup-prompt {
+.login-prompt {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -143,12 +143,12 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
-.signup-link {
+.login-link {
     color: #ad8301;
     text-decoration: none;
     font-weight: 600;
 }
 
-.signup-link:hover {
+.login-link:hover {
     text-decoration: underline;
 }
