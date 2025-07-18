@@ -2,200 +2,223 @@
 
 /* --- Variáveis Globais e Estilos Base --- */
 :root {
-  --font-serif: 'Times New Roman', Times, serif;
-  --color-brand-yellow: #F2B11D;
-  --color-brand-brown: #A07855;
-  --color-brand-green: #2C641E;
-  --color-brand-bg: #F8F5EF;
-  --color-card-bg: #FFFFFF;
-  --color-header-text: #3B2116;
+    --font-serif: 'Times New Roman', Times, serif;
+    --color-brand-yellow: #F2B11D;
+    --color-brand-brown: #A07855;
+    --color-brand-green: #2C641E;
+    --color-brand-bg: #F8F5EF;
+    --color-card-bg: #FFFFFF;
+    --color-header-text: #3B2116;
 }
 
 body {
-  font-family: var(--font-serif);
-  background-color: var(--color-brand-bg);
-  color: var(--color-header-text);
-  margin: 0;
+    font-family: var(--font-serif);
+    background-color: var(--color-brand-bg);
+    color: var(--color-header-text);
+    margin: 0;
 }
 
 /* --- Componentes do Header --- */
 .main-nav {
-  background-color: var(--color-brand-yellow);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 2rem;
-  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  flex-wrap: wrap;
+    background-color: var(--color-brand-yellow);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 1.5rem; /* Padding ajustado para telas menores */
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    gap: 1rem; /* Espaçamento entre os itens */
 }
 
 .nav-links {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
 }
 
 .nav-link {
-  font-size: 0.875rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--color-header-text);
-  text-decoration: none;
-  transition: color 200ms ease-in-out;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-header-text);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
+    white-space: nowrap; /* Evita que os links quebrem linha */
 }
 .nav-link:hover {
-  color: var(--color-brand-green);
+    color: var(--color-brand-green);
 }
 
 .logo-header-height {
-  height: 4rem !important;
+    height: 4rem !important;
+    flex-shrink: 0; /* Impede que a logo encolha */
 }
 
 .nav-search-bar {
-  position: relative;
-  display: flex;
-  align-items: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1; /* Permite que a barra cresça */
+    max-width: 500px; /* Limita a largura máxima em telas grandes */
 }
 
 .nav-search-input {
-  width: 16rem;
-  background-color: rgba(255, 255, 255, 0.8);
-  border-radius: 9999px;
-  padding: 0.375rem 2.5rem 0.375rem 1rem;
-  font-size: 0.875rem;
-  color: var(--color-header-text);
-  border: none;
+    width: 100%; /* Ocupa todo o espaço do container */
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 9999px;
+    padding: 0.375rem 2.5rem 0.375rem 1rem;
+    font-size: 0.875rem;
+    color: var(--color-header-text);
+    border: none;
+    box-sizing: border-box;
 }
 .nav-search-input::placeholder {
-  color: var(--color-header-text);
-  opacity: 0.7;
+    color: var(--color-header-text);
+    opacity: 0.7;
 }
 .nav-search-input:focus {
-  outline: 2px solid var(--color-brand-brown);
+    outline: 2px solid var(--color-brand-brown);
 }
 
 .nav-search-icon {
-  position: absolute;
-  right: 0.75rem;
-  color: var(--color-header-text);
-  background: none;
-  border: none;
-  cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    color: var(--color-header-text);
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
 .nav-user-actions {
-  display: flex;
-  align-items: center;
-  gap: 1.5rem; /* Aumentado um pouco o gap */
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; 
 }
 
 .nav-user-action {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--color-header-text);
-  text-decoration: none;
-  transition: color 200ms ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-header-text);
+    text-decoration: none;
+    transition: color 200ms ease-in-out;
 }
 .nav-user-action:hover {
-  color: var(--color-brand-green);
+    color: var(--color-brand-green);
 }
 .nav-user-action .fa-solid {
-  font-size: 1.25rem;
+    font-size: 1.25rem;
+}
+
+/* --- Menu Hambúrguer e Mobile --- */
+.mobile-only {
+    display: none; /* Oculto por padrão */
+    flex-shrink: 0; /* Impede que o botão encolha */
+}
+
+#hamburger-btn {
+    font-size: 1.75rem;
+    color: var(--color-header-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 300px; /* Largura do menu lateral */
+    height: 100%;
+    background-color: var(--color-brand-bg);
+    z-index: 1000;
+    padding: 1.5rem;
+    box-shadow: -10px 0px 30px -15px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    transform: translateX(100%); /* Começa fora da tela */
+    transition: transform 0.3s ease-in-out;
+}
+
+#mobile-menu.open {
+    transform: translateX(0); /* Entra na tela */
+}
+
+.mobile-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mobile-menu-logo {
+    height: 3rem;
+}
+
+#close-menu-btn {
+    font-size: 2rem;
+    color: var(--color-header-text);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.mobile-menu-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.mobile-menu-links .nav-link {
+    font-size: 1.125rem;
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: 8px;
+}
+.mobile-menu-links .nav-link:hover {
+    background-color: var(--color-brand-yellow);
+}
+
+.mobile-user-actions {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-top: auto; /* Empurra para o fundo */
+    padding-bottom: 1rem;
 }
 
 /* --- Componentes do Footer --- */
 .footer-new {
-  background-color: var(--color-brand-yellow);
-  margin-top: 4rem;
-  color: var(--color-header-text);
-  padding: 2rem 2rem;
+    background-color: var(--color-brand-yellow);
+    margin-top: 4rem;
+    color: var(--color-header-text);
+    padding: 2rem 2rem;
 }
-
-/* Em css/base.css */
 
 .footer-grid {
     max-width: 80rem;
     margin: 0 auto;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center; /* <<< ALTERE PARA 'center' */
+    align-items: center;
     gap: 2rem;
 }
 
-.footer-logo-container {
-    display: flex;
-    justify-content: flex-start;
-}
-
-.logo-footer-height {
-  height: 9rem !important;
-}
-
-.footer-center {
-    text-align: center;
-}
-
-.footer-social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  font-size: 1.5rem;
-  margin-bottom: 0.75rem;
-}
-
-.footer-social-icons a {
-    color: var(--color-header-text);
-    text-decoration: none;
-    transition: color 200ms ease-in-out;
-}
-.footer-social-icons a:hover {
-    color: var(--color-brand-green);
-}
-
-.footer-address {
-    font-size: 1rem;
-    margin-bottom: 0.25rem;
-}
-
-.footer-copyright {
-    font-size: 0.875rem;
-}
-
-.footer-seal {
-    height: 3rem;
-    margin: 0.75rem auto 0 auto;
-}
-
-.footer-payment {
-    display: flex;
-    justify-content: flex-end;
-}
-
-.footer-payment-title {
-    font-weight: 700;
-    margin-bottom: 0.75rem;
-    text-align: center;
-}
-
-.payment-icons-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0.5rem 0.25rem;
-    width: 100%;
-    max-width: 200px;
-}
-
-.payment-icon-wrapper {
-    height: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
+.footer-logo-container { display: flex; justify-content: flex-start; }
+.logo-footer-height { height: 9rem !important; }
+.footer-center { text-align: center; }
+.footer-social-icons { display: flex; justify-content: center; gap: 1rem; font-size: 1.5rem; margin-bottom: 0.75rem; }
+.footer-social-icons a { color: var(--color-header-text); text-decoration: none; transition: color 200ms ease-in-out; }
+.footer-social-icons a:hover { color: var(--color-brand-green); }
+.footer-address { font-size: 1rem; margin-bottom: 0.25rem; }
+.footer-copyright { font-size: 0.875rem; }
+.footer-seal { height: 3rem; margin: 0.75rem auto 0 auto; }
+.footer-payment { display: flex; justify-content: flex-end; }
+.footer-payment-title { font-weight: 700; margin-bottom: 0.75rem; text-align: center; }
+.payment-icons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem 0.25rem; width: 100%; max-width: 200px; }
+.payment-icon-wrapper { height: 2rem; display: flex; align-items: center; justify-content: center; }
 .payment-icon { object-fit: contain; }
 .payment-icon.mastercard { height: 1.5rem; }
 .payment-icon.visa { height: 1.25rem; }
@@ -206,35 +229,32 @@ body {
 
 /* --- Responsividade (Base, Header e Footer) --- */
 @media (max-width: 1024px) {
-  .main-nav, .nav-links {
-    gap: 1rem;
-  }
-  .nav-links {
-    flex-wrap: wrap;
-    width: 100%;
-    justify-content: center;
-    text-align: center;
-  }
-  .nav-user-actions {
-    justify-content: center;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
-  .nav-search-bar {
-    width: 100%;
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
-  .nav-search-input {
-    width: 100%;
-    max-width: 20rem;
-  }
-  .footer-grid {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    text-align: center;
-  }
-  .footer-logo-container, .footer-payment {
-    justify-content: center;
-  }
+    /* Esconde os links e ações de usuário do header no mobile */
+    .desktop-only {
+        display: none;
+    }
+    /* Mostra o botão hambúrguer no mobile */
+    .mobile-only {
+        display: block;
+    }
+
+    /* Ajustes no Footer */
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        text-align: center;
+    }
+    .footer-logo-container, .footer-payment {
+        justify-content: center;
+    }
+}
+
+/* Regra para telas ainda menores, se necessário */
+@media (max-width: 480px) {
+    .main-nav {
+        padding: 0.5rem 1rem;
+    }
+    .nav-search-input::placeholder {
+        font-size: 0.75rem; /* Diminui o texto do placeholder */
+    }
 }

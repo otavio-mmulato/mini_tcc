@@ -15,22 +15,24 @@
 
     <header>
         <nav class="main-nav">
-            <div class="nav-links">
-                <a href="#"><img src="./src/logo.png" alt="Logo Jardim da Diana" class="logo-header-height"></a>
+            <a href="#"><img src="./src/logo.png" alt="Logo Jardim da Diana" class="logo-header-height"></a>
+            
+            <div class="nav-links desktop-only">
                 <a href="#" class="nav-link">Presente</a>
                 <a href="#" class="nav-link">Buquês</a>
                 <a href="#" class="nav-link">Itens de Jardinagem</a>
                 <a href="#" class="nav-link">Suculentas</a>
                 <a href="#" class="nav-link">Sobre Nós</a>
             </div>
+
+            <div class="nav-search-bar">
+                <input type="text" placeholder="Buscar item..." class="nav-search-input">
+                <button class="nav-search-icon">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+            </div>
             
-            <div class="nav-user-actions">
-                <div class="nav-search-bar">
-                    <input type="text" placeholder="Buscar item..." class="nav-search-input">
-                    <button class="nav-search-icon">
-                        <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                </div>
+            <div class="nav-user-actions desktop-only">
                 <a href="#" class="nav-user-action">
                     <i class="fa-solid fa-user"></i>
                     <span>PERFIL</span>
@@ -40,8 +42,39 @@
                     <span>SACOLA</span>
                 </a>
             </div>
+
+            <button id="hamburger-btn" class="mobile-only">
+                <i class="fa-solid fa-bars"></i>
+            </button>
         </nav>
     </header>
+
+    <div id="mobile-menu">
+        <div class="mobile-menu-header">
+            <img src="./src/logo.png" alt="Logo" class="mobile-menu-logo">
+            <button id="close-menu-btn">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        <div class="mobile-menu-links">
+            <a href="#" class="nav-link">Presente</a>
+            <a href="#" class="nav-link">Buquês</a>
+            <a href="#" class="nav-link">Itens de Jardinagem</a>
+            <a href="#" class="nav-link">Suculentas</a>
+            <a href="#" class="nav-link">Sobre Nós</a>
+        </div>
+        <div class="mobile-user-actions">
+            <a href="#" class="nav-user-action">
+                <i class="fa-solid fa-user"></i>
+                <span>PERFIL</span>
+            </a>
+            <a href="#" class="nav-user-action">
+                <i class="fa-solid fa-shopping-bag"></i>
+                <span>SACOLA</span>
+            </a>
+        </div>
+    </div>
+
 
     <main class="main-container">
         <h2 class="section-title">Mais Vendidos</h2>
@@ -129,5 +162,7 @@
         </div>
     </footer>
 
+    <script src="./js/menu.js"></script>
+    <script src="./js/scroll-animation.js"></script>
 </body>
 </html>

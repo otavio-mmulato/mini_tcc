@@ -174,3 +174,36 @@
         grid-template-columns: repeat(5, 1fr);
     }
 }
+
+/* --- Animação de Scroll para Depoimentos --- */
+
+/* Estado inicial dos cards:
+  - Opacidade 0 (invisível).
+  - Deslocado 30px para baixo.
+  - Uma transição suave para quando as propriedades mudarem.
+*/
+.testimonial-card {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+/* Classe que será adicionada via JavaScript quando o card estiver visível:
+  - Opacidade 1 (totalmente visível).
+  - Volta para a posição original (sem deslocamento).
+*/
+.testimonial-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* (Opcional, mas recomendado) Adiciona um pequeno atraso para cada card,
+  criando um efeito escalonado que fica muito elegante.
+*/
+.testimonial-card:nth-of-type(2).is-visible {
+    transition-delay: 0.2s;
+}
+
+.testimonial-card:nth-of-type(3).is-visible {
+    transition-delay: 0.4s;
+}
