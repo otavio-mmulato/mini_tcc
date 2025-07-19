@@ -207,3 +207,73 @@
 .testimonial-card:nth-of-type(3).is-visible {
     transition-delay: 0.4s;
 }
+
+
+/* --- Componentes do carrossel --- */
+/* --- Estilos do Carrossel de Produtos --- */
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    padding: 0 40px; /* Espaço para os botões não sobreporem o conteúdo */
+    box-sizing: border-box;
+}
+
+.carousel-wrapper {
+    width: 100%;
+    overflow: hidden; /* A mágica acontece aqui: esconde o que está fora da área visível */
+}
+
+.carousel-track {
+    display: flex; /* Alinha os produtos lado a lado */
+    gap: 1.5rem; /* Espaçamento entre os cards */
+    transition: transform 0.5s ease-in-out; /* Animação de rolagem */
+}
+
+/* Garante que os cards do carrossel tenham um tamanho fixo e não encolham */
+.carousel-track .product-card {
+    flex: 0 0 auto; /* Não cresce, não encolhe, base automática */
+    width: 250px; /* Largura fixa para cada card */
+}
+
+.carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.7);
+    border: 1px solid var(--color-brand-brown);
+    color: var(--color-brand-brown);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.carousel-btn:hover {
+    background-color: var(--color-brand-brown);
+    color: white;
+}
+
+.carousel-btn.prev {
+    left: 0;
+}
+
+.carousel-btn.next {
+    right: 0;
+}
+
+.carousel-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.4;
+}
+
+/* Oculta o grid antigo para evitar conflitos */
+.products-grid {
+    display: none;
+}
