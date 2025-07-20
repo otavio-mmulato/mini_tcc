@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from produtos.views import home_view # Importa a view da sua página inicial
+from produtos.views import home_view, buques_view, presentes_view, jardinagem_view, suculentas_view, sobre_nos_view, produto_detalhe_view # Importa a view da sua página inicial
 
 urlpatterns = [
     # Rota para o painel de administração
@@ -18,6 +18,18 @@ urlpatterns = [
 
     # Delega as rotas de autenticação para o app 'usuarios'
     path('auth/', include('usuarios.urls')),
+
+    path('buques/', buques_view, name='buques'),  # Rota para a página de buquês
+
+    path('presentes/', presentes_view, name='presentes'),  # Rota para a página de presentes
+
+    path('jardinagem/', jardinagem_view, name='jardinagem'),  # Rota para a página de jardinagem
+    
+    path('suculentas/', suculentas_view, name='suculentas'),
+
+    path('sobre-nos/', sobre_nos_view, name='sobre-nos'),  # Rota para a página "Sobre Nós"
+
+    path('produto/<int:pk>/', produto_detalhe_view, name='produto-detalhe')
 ]
 
 # Configuração para servir arquivos de mídia (imagens dos produtos)

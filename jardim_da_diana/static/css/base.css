@@ -226,6 +226,11 @@ body {
 .payment-icon.elo { height: 1.25rem; }
 .payment-icon.hipercard { height: 2rem; }
 .payment-icon.paypal { height: 1.5rem; }
+/* Adicione em css/base.css para garantir que funcione em todas as páginas */
+.product-card-link {
+    text-decoration: none; /* Remove o sublinhado */
+    color: inherit; /* Faz o texto do link herdar a cor normal */
+}
 
 /* --- Responsividade (Base, Header e Footer) --- */
 @media (max-width: 1024px) {

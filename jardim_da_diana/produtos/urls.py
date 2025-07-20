@@ -2,7 +2,6 @@
 
 from django.urls import path
 from . import views
-
 # Estas são apenas as rotas DENTRO de /api/
 urlpatterns = [
     path('categorias/', views.CategoriaList.as_view(), name='categoria-list'),
