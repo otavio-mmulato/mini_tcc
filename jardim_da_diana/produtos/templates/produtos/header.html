@@ -23,9 +23,9 @@
                 <i class="fa-solid fa-user"></i>
                 <span>PERFIL</span>
             </a>
-            <a href="#" class="nav-user-action">
+            <a href="{% url 'cart:cart_detail' %}" class="nav-user-action">
                 <i class="fa-solid fa-shopping-bag"></i>
-                <span>SACOLA</span>
+                <span>SACOLA ({% if cart|length > 0 %}{{ cart|length }}{% else %}0{% endif %})</span>
             </a>
         </div>
 

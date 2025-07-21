@@ -1,0 +1,73 @@
+{% extends "produtos/base.html" %}
+{% load static %}
+
+{% block title %}Minha Sacola - Jardim da Diana{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main-container">
+    <h2 class="section-title cart-title">Minha Sacola</h2>
+    
+    <div class="cart-layout">
+        <div class="cart-items-card">
+            {% if cart|length > 0 %}
+                <table class="cart-table">
+                    <thead>
+                        <tr>
+                            <th class="th-produto" colspan="2">Produto</th>
+                            <th class="th-quantidade">Quantidade</th>
+                            <th class="th-preco">Preço Unit.</th>
+                            <th class="th-subtotal">Subtotal</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cart %}
+                            <tr>
+                                <td class="td-produto" colspan="2">
+                                    <div class="produto-cell">
+                                        <a href="{% url 'produto-detalhe' pk=item.product.id %}">
+                                            {% if item.product.imagem %}
+                                                <img src="{{ item.product.imagem.url }}" class="cart-image" alt="{{ item.product.nome }}">
+                                            {% endif %}
+                                        </a>
+                                        <a href="{% url 'produto-detalhe' pk=item.product.id %}" class="produto-nome">{{ item.product.nome }}</a>
+                                    </div>
+                                </td>
+                                <td class="td-quantidade">
+                                    <form action="{% url 'cart:cart_add' item.product.id %}" method="post" class="quantity-form">
+                                        {% csrf_token %}
+                                        <div class="quantity-selector">
+                                            <button type="button" class="quantity-btn minus">-</button>
+                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="quantity-input" readonly>
+                                            <button type="button" class="quantity-btn plus">+</button>
+                                        </div>
+                                        <button type="submit" class="update-cart-btn">Atualizar</button>
+                                    </form>
+                                </td>
+                                <td class="td-preco num">R$ {{ item.price|floatformat:2 }}</td>
+                                <td class="td-subtotal num">R$ {{ item.total_price|floatformat:2 }}</td>
+                                <td class="td-remover"><a href="{% url 'cart:cart_remove' item.product.id %}" class="remove-link" title="Remover item">&times;</a></td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% else %}
+                <p class="cart-empty-message">Sua sacola está vazia.</p>
+            {% endif %}
+        </div>
+
+        <div class="cart-summary-card">
+            <h3 class="summary-title">Resumo do Pedido</h3>
+            <div class="summary-item"><span>Total de Itens:</span><span>R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
+            <div class="summary-item"><span>Frete:</span><span class="frete-gratis">Frete Grátis</span></div>
+            <hr class="summary-divider">
+            <div class="summary-total"><span>Total Geral:</span><span>R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
+            <button class="btn btn-primary checkout-btn" {% if not cart|length > 0 %}disabled{% endif %}>Finalizar Pedido</button>
+        </div>
+    </div>
+</main>
+{% endblock %}

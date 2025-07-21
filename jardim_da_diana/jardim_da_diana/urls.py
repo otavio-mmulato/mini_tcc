@@ -19,6 +19,8 @@ urlpatterns = [
     # Delega as rotas de autenticação para o app 'usuarios'
     path('auth/', include('usuarios.urls')),
 
+    path('sacola/', include('cart.urls')),  # Rota para o carrinho de compras
+
     path('buques/', buques_view, name='buques'),  # Rota para a página de buquês
 
     path('presentes/', presentes_view, name='presentes'),  # Rota para a página de presentes

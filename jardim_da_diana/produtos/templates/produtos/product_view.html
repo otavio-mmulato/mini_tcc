@@ -1,54 +1,46 @@
+{% extends "produtos/base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ produto.nome }} - Jardim da Diana</title>
-    
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <link rel="stylesheet" href="{% static 'css/product_view.css' %}"> 
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
-    <link rel="icon" type="image/png" href="{% static 'src/diana.png' %}" sizes="180x180"/>
-</head>
-<body>
 
-    {% include 'produtos/header.html' %}
+{% block title %}{{ produto.nome }} - Jardim da Diana{% endblock %}
 
-    <main class="main-container">
-        <div class="product-detail-card">
-            
-            <div class="product-image-container">
-                {% if produto.imagem %}
-                    <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
-                {% else %}
-                    <img src="{% static 'src/placeholder.png' %}" alt="Imagem não disponível">
-                {% endif %}
-            </div>
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/product_view.css' %}">
+{% endblock %}
 
-            <div class="product-info-container">
-                <span class="product-category-badge">{{ produto.categoria.nome }}</span>
-                <h1 class="product-title">{{ produto.nome }}</h1>
-                <p class="product-description">{{ produto.descricao }}</p>
-                
-                <div class="product-purchase-section">
-                    <p class="product-price">R$ {{ produto.preco|floatformat:2 }}</p>
-                    <div class="product-actions">
-                        <button class="btn btn-primary">
-                            <i class="fa-solid fa-bag-shopping"></i>
-                            Adicionar à Sacola
-                        </button>
-                    </div>
-                </div>
-            </div>
-
+{% block content %}
+<main class="main-container">
+    <div class="product-detail-card">
+        
+        <div class="product-image-container">
+            {% if produto.imagem %}
+                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
+            {% else %}
+                <img src="{% static 'src/placeholder.png' %}" alt="Imagem não disponível">
+            {% endif %}
         </div>
-    </main>
-    
-    {% include 'produtos/footer.html' %}
 
-    <script src="{% static 'js/menu.js' %}"></script>
-</body>
-</html>
+        <div class="product-info-container">
+            <h1 class="product-title">{{ produto.nome }}</h1>
+            <p class="product-description">{{ produto.descricao }}</p>
+            <p class="product-category"><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
+            
+            <p class="product-price">R$ {{ produto.preco|floatformat:2 }}</p>
+
+            <div class="product-actions">
+                <form action="{% url 'cart:cart_add' produto.id %}" method="post" class="detail-form">
+                    {% csrf_token %}
+                    <div class="quantity-selector">
+                        <button type="button" class="quantity-btn minus">-</button>
+                        <input type="number" name="quantity" value="1" min="1" max="99" class="quantity-input" readonly>
+                        <button type="button" class="quantity-btn plus">+</button>
+                    </div>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa-solid fa-bag-shopping"></i> Adicionar à Sacola
+                    </button>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</main>
+{% endblock %}

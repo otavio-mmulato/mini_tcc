@@ -1,0 +1,142 @@
+/* --- Estilos da Página de Categoria (Buquês) --- */
+
+.main-container {
+    padding-top: 3rem;
+    padding-bottom: 5rem;
+}
+
+.section-title {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+/* --- Grid de Produtos com 3 Colunas --- */
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* --- Card de Produto --- */
+.product-card {
+    background-color: #fdfdfa;
+    border: 1px solid #e7e5e1;
+    border-radius: 12px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+/* Animação de entrada dos cards */
+{% for i in '123456789'|make_list %}
+.product-card-link:nth-child({{ i }}) .product-card {
+    animation-delay: {{ i|add:"-1"|multiply:0.1 }}s;
+}
+{% endfor %}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Wrapper da imagem com placeholder */
+.product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #f5f3ef;
+}
+
+.product-card img {
+    width: 100%;
+    display: block;
+    
+    /* MUDANÇA AQUI: Imagem agora é quadrada */
+    aspect-ratio: 1 / 1; 
+    
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 0.5s ease-out;
+}
+
+.product-card img:not([src=""]) {
+    opacity: 1;
+}
+
+.product-card-link:hover .product-card img {
+    transform: scale(1.1);
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.product-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.product-card-link:hover .product-image-overlay {
+    opacity: 1;
+}
+
+.overlay-button {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    color: var(--color-header-text, #3B2116);
+    border: none;
+    border-radius: 50px;
+    font-weight: 600;
+}
+
+.product-card-info {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-card-info p {
+    font-size: 1rem;
+    color: var(--color-header-text, #3B2116);
+    margin: 0;
+    flex-grow: 1;
+}
+
+.product-card-info .price {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--color-brand-brown, #A07855);
+    margin-top: 0.5rem;
+}
+
+
+/* --- Responsividade do Grid --- */
+@media (max-width: 1024px) {
+    .products-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .products-grid {
+        grid-template-columns: 1fr;
+    }
+    .section-title {
+        text-align: center;
+    }
+}
