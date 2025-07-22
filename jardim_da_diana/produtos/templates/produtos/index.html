@@ -27,12 +27,12 @@
                 <a href="{% url 'sobre-nos' %}" class="nav-link">Sobre Nós</a>
             </div>
 
-            <div class="nav-search-bar">
-                <input type="text" placeholder="Buscar item..." class="nav-search-input">
-                <button class="nav-search-icon">
+            <form action="{% url 'search' %}" method="get" class="nav-search-bar">
+                <input type="text" name="q" placeholder="Buscar item..." class="nav-search-input" value="{{ query|default:'' }}">
+                <button type="submit" class="nav-search-icon">
                     <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
-            </div>
+            </form>
             
             <div class="nav-user-actions desktop-only">
                 <a href="#" class="nav-user-action">

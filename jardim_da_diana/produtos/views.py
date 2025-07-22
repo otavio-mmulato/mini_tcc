@@ -5,6 +5,7 @@ from rest_framework import generics
 from .models import Categoria, Produto
 from .serializers import CategoriaSerializer, ProdutoSerializer
 from django.shortcuts import render, get_object_or_404
+from django.db.models import Q
 # --- View para a Página Principal ---
 def home_view(request):
     """
@@ -105,3 +106,22 @@ def produto_detalhe_view(request, pk):
         'produto': produto,
     }
     return render(request, 'produtos/product_view.html', context)
+
+def search_view(request):
+    query = request.GET.get('q', '') # Pega o termo da busca da URL (ex: ?q=rosas)
+    
+    if query:
+        # Busca produtos onde o nome OU a descrição contenham a query.
+        # O 'icontains' torna a busca case-insensitive (não diferencia maiúsculas/minúsculas).
+        produtos_encontrados = Produto.objects.filter(
+            Q(nome__icontains=query) | Q(descricao__icontains=query)
+        ).distinct()
+    else:
+        produtos_encontrados = []
+
+    context = {
+        'produtos': produtos_encontrados,
+        'query': query, # Enviamos a query de volta para mostrar na página
+        'titulo_da_pagina': f'Busca por "{query}"'
+    }
+    return render(request, 'produtos/search_results.html', context)
