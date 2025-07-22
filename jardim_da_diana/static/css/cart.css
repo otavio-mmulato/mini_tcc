@@ -1,37 +1,121 @@
-/* ... (Estilos do .cart-layout, .cart-summary-card etc. continuam aqui) ... */
 .cart-title { text-align: center; color: var(--color-brand-brown); font-size: 2.25rem; margin-bottom: 2rem; }
 .cart-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
 .cart-items-card, .cart-summary-card { background-color: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
 
-/* --- Tabela de Itens Corrigida --- */
+/* --- Tabela de Itens --- */
 .cart-table { width: 100%; border-collapse: collapse; }
-.cart-table th { text-align: left; padding-bottom: 1rem; color: var(--color-stone-700); font-weight: 600; border-bottom: 1px solid #e5e7eb; }
-.cart-table td { padding: 1.5rem 0.5rem; border-bottom: 1px solid #e5e7eb; vertical-align: middle; }
+.cart-table th, .cart-table td { padding: 1.5rem 1rem; border-bottom: 1px solid #e5e7eb; vertical-align: middle; text-align: left; }
 .cart-table tr:last-child td { border-bottom: none; }
+.th-produto { width: 45%; }
+.th-quantidade, .th-preco, .th-subtotal { text-align: center; }
 
-/* Célula do Produto (Imagem + Nome) */
-.td-produto { width: 40%; }
-.produto-cell { display: flex; align-items: center; gap: 1rem; }
-.cart-image { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; }
-.produto-nome { color: var(--color-header-text); text-decoration: none; font-weight: 600; }
+.produto-cell { display: flex; align-items: center; gap: 1.5rem; }
+.cart-image { width: 90px; height: 90px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+.produto-nome { color: var(--color-header-text); text-decoration: none; font-weight: 600; font-size: 1rem; }
 .produto-nome:hover { color: var(--color-brand-green); }
 
-/* Célula de Quantidade */
-.td-quantidade { width: 25%; }
-.quantity-form { display: flex; flex-direction: column; align-items: flex-start; gap: 0.5rem; }
-.update-cart-btn { background: none; border: none; color: var(--color-brand-green); text-decoration: underline; cursor: pointer; font-size: 0.8rem; padding: 0; }
-
-/* Outras Células */
-.td-remover { text-align: center; }
+.td-quantidade { text-align: center; }
+.td-remover { width: 50px; text-align: center; }
 .remove-link { font-size: 1.8rem; font-weight: bold; color: #ef4444; text-decoration: none; }
-.num { text-align: right; }
+.num { text-align: right; font-family: var(--font-serif); font-size: 1.1rem; }
 
-/* ... (Resto do CSS da sacola, responsividade, etc.) ... */
+/* --- Resumo do Pedido --- */
 .summary-title { text-align: center; color: var(--color-brand-brown); font-size: 1.5rem; margin-top: 0; margin-bottom: 2rem; }
 .summary-item, .summary-total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1rem; }
 .frete-gratis { color: var(--color-brand-green); font-weight: 600; }
 .summary-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
 .summary-total { font-size: 1.25rem; font-weight: bold; }
-.checkout-btn { width: 100%; margin-top: 1.5rem; }
-.cart-empty-message { padding: 2rem; text-align: center; font-size: 1.125rem; color: var(--color-stone-700); }
-@media (max-width: 992px) { .cart-layout { grid-template-columns: 1fr; } }
+.checkout-btn { width: 100%; margin-top: 1.5rem; text-align: center; }
+.checkout-btn.disabled { background-color: #ccc; border-color: #ccc; pointer-events: none; }
+.cart-empty-message { padding: 2rem; text-align: center; font-size: 1.125rem; color: #4b5563; }
+
+/* --- Seletor de Quantidade --- */
+.quantity-selector { display: inline-flex; align-items: center; border: 1px solid #d1d5db; border-radius: 8px; }
+.quantity-btn { background-color: #f9fafb; border: none; cursor: pointer; font-size: 1.2rem; font-weight: 600; width: 40px; height: 40px; color: #374151; transition: background-color 0.2s; }
+.quantity-btn:hover { background-color: #f3f4f6; }
+.quantity-btn.minus { border-top-left-radius: 7px; border-bottom-left-radius: 7px; }
+.quantity-btn.plus { border-top-right-radius: 7px; border-bottom-right-radius: 7px; }
+.quantity-input { width: 50px; height: 40px; text-align: center; border: none; border-left: 1px solid #d1d5db; border-right: 1px solid #d1d5db; font-size: 1rem; font-weight: 600; background-color: #fff; color: var(--color-header-text); -moz-appearance: textfield; }
+.quantity-input::-webkit-outer-spin-button, .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+/* --- RESPONSIVIDADE FINAL --- */
+@media (max-width: 1024px) { 
+    .cart-layout { grid-template-columns: 1fr; } 
+}
+
+@media (max-width: 768px) {
+    .cart-items-card {
+        padding: 0;
+        box-shadow: none;
+        background: none;
+    }
+
+    .cart-table thead {
+        display: none; /* Esconde o cabeçalho da tabela no celular */
+    }
+
+    .cart-table, .cart-table tbody, .cart-table tr, .cart-table td {
+        display: block; /* Faz tudo se comportar como um bloco */
+        width: 100%;
+        text-align: right; /* Alinha o conteúdo da célula à direita */
+    }
+
+    .cart-table tr {
+        background-color: #fff;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+        position: relative; /* IMPORTANTE: Adicionado para o posicionamento do botão remover */
+    }
+    
+    .cart-table td {
+        border-bottom: 1px solid #f3f4f6;
+        padding: 1rem 0;
+        display: flex; /* Alinha o label e o valor */
+        justify-content: space-between;
+        align-items: center;
+    }
+    /* Usa :last-of-type para garantir que o último TD não tenha borda */
+    .cart-table tr td:last-of-type {
+        border-bottom: none;
+    }
+    
+    .cart-table td::before {
+        content: attr(data-label); /* Mostra o texto do data-label */
+        font-weight: 600;
+        color: #374151;
+        text-align: left;
+        margin-right: 1rem;
+    }
+    
+    /* Célula do produto tem tratamento especial */
+    .td-produto {
+        padding-top: 0;
+        padding-bottom: 1rem;
+    }
+    .td-produto::before {
+        display: none; /* Não precisa de label "Produto" */
+    }
+    .produto-cell {
+        justify-content: flex-start; /* Alinha imagem e nome à esquerda */
+    }
+
+    /* A célula de remover agora fica posicionada no canto */
+    .td-remover {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        width: auto;
+        border: none;
+        padding: 0;
+        display: inline-block;
+    }
+    .td-remover::before {
+        display: none;
+    }
+    .remove-link {
+        font-size: 1.8rem;
+        padding: 0.25rem 0.5rem; /* Aumenta a área de clique */
+    }
+}

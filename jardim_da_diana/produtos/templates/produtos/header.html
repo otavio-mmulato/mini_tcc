@@ -25,7 +25,7 @@
             </a>
             <a href="{% url 'cart:cart_detail' %}" class="nav-user-action">
                 <i class="fa-solid fa-shopping-bag"></i>
-                <span>SACOLA ({% if cart|length > 0 %}{{ cart|length }}{% else %}0{% endif %})</span>
+                <span>SACOLA (<span id="cart-total-items">{% if cart|length > 0 %}{{ cart|length }}{% else %}0{% endif %}</span>)</span>
             </a>
         </div>
 

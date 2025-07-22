@@ -10,7 +10,6 @@
 {% block content %}
 <main class="main-container">
     <h2 class="section-title cart-title">Minha Sacola</h2>
-    
     <div class="cart-layout">
         <div class="cart-items-card">
             {% if cart|length > 0 %}
@@ -26,30 +25,24 @@
                     </thead>
                     <tbody>
                         {% for item in cart %}
-                            <tr>
-                                <td class="td-produto" colspan="2">
+                            <tr data-product-id="{{ item.product.id }}">
+                                <td colspan="2">
                                     <div class="produto-cell">
                                         <a href="{% url 'produto-detalhe' pk=item.product.id %}">
-                                            {% if item.product.imagem %}
-                                                <img src="{{ item.product.imagem.url }}" class="cart-image" alt="{{ item.product.nome }}">
-                                            {% endif %}
+                                            {% if item.product.imagem %}<img src="{{ item.product.imagem.url }}" class="cart-image">{% endif %}
                                         </a>
                                         <a href="{% url 'produto-detalhe' pk=item.product.id %}" class="produto-nome">{{ item.product.nome }}</a>
                                     </div>
                                 </td>
                                 <td class="td-quantidade">
-                                    <form action="{% url 'cart:cart_add' item.product.id %}" method="post" class="quantity-form">
-                                        {% csrf_token %}
-                                        <div class="quantity-selector">
-                                            <button type="button" class="quantity-btn minus">-</button>
-                                            <input type="number" name="quantity" value="{{ item.quantity }}" min="1" max="99" class="quantity-input" readonly>
-                                            <button type="button" class="quantity-btn plus">+</button>
-                                        </div>
-                                        <button type="submit" class="update-cart-btn">Atualizar</button>
-                                    </form>
+                                    <div class="quantity-selector">
+                                        <button type="button" class="quantity-btn minus" data-product-id="{{ item.product.id }}">-</button>
+                                        <input type="number" value="{{ item.quantity }}" min="1" max="99" class="quantity-input" readonly>
+                                        <button type="button" class="quantity-btn plus" data-product-id="{{ item.product.id }}">+</button>
+                                    </div>
                                 </td>
-                                <td class="td-preco num">R$ {{ item.price|floatformat:2 }}</td>
-                                <td class="td-subtotal num">R$ {{ item.total_price|floatformat:2 }}</td>
+                                <td class="num">R$ {{ item.price|floatformat:2 }}</td>
+                                <td class="num item-subtotal">R$ {{ item.total_price|floatformat:2 }}</td>
                                 <td class="td-remover"><a href="{% url 'cart:cart_remove' item.product.id %}" class="remove-link" title="Remover item">&times;</a></td>
                             </tr>
                         {% endfor %}
@@ -59,15 +52,17 @@
                 <p class="cart-empty-message">Sua sacola está vazia.</p>
             {% endif %}
         </div>
-
         <div class="cart-summary-card">
             <h3 class="summary-title">Resumo do Pedido</h3>
-            <div class="summary-item"><span>Total de Itens:</span><span>R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
+            <div class="summary-item"><span>Total de Itens:</span><span id="summary-subtotal">R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
             <div class="summary-item"><span>Frete:</span><span class="frete-gratis">Frete Grátis</span></div>
             <hr class="summary-divider">
-            <div class="summary-total"><span>Total Geral:</span><span>R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
+            <div class="summary-total"><span>Total Geral:</span><span id="summary-total">R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
             <button class="btn btn-primary checkout-btn" {% if not cart|length > 0 %}disabled{% endif %}>Finalizar Pedido</button>
         </div>
     </div>
 </main>
 {% endblock %}
+
+{% block extra_js %}
+    {% endblock %}
