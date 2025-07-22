@@ -20,25 +20,24 @@
         </div>
 
         <div class="product-info-container">
+            <p class="product-category">{{ produto.categoria.nome }}</p>
+
             <h1 class="product-title">{{ produto.nome }}</h1>
             <p class="product-description">{{ produto.descricao }}</p>
-            <p class="product-category"><strong>Categoria:</strong> {{ produto.categoria.nome }}</p>
             
             <p class="product-price">R$ {{ produto.preco|floatformat:2 }}</p>
 
-            <div class="product-actions">
-                <form action="{% url 'cart:cart_add' produto.id %}" method="post" class="detail-form">
-                    {% csrf_token %}
-                    <div class="quantity-selector">
-                        <button type="button" class="quantity-btn minus">-</button>
-                        <input type="number" name="quantity" value="1" min="1" max="99" class="quantity-input" readonly>
-                        <button type="button" class="quantity-btn plus">+</button>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa-solid fa-bag-shopping"></i> Adicionar à Sacola
-                    </button>
-                </form>
-            </div>
+            <form action="{% url 'cart:cart_add' produto.id %}" method="post" class="detail-form">
+                {% csrf_token %}
+                <div class="quantity-selector">
+                    <button type="button" class="quantity-btn minus">-</button>
+                    <input type="number" name="quantity" value="1" min="1" max="99" class="quantity-input" readonly>
+                    <button type="button" class="quantity-btn plus">+</button>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fa-solid fa-bag-shopping"></i> Adicionar à Sacola
+                </button>
+            </form>
         </div>
 
     </div>

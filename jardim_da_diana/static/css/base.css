@@ -6,7 +6,7 @@
     --color-brand-yellow: #F2B11D;
     --color-brand-brown: #A07855;
     --color-brand-green: #2C641E;
-    --color-brand-bg: #F8F5EF;
+    --color-brand-bg: #fff9de;
     --color-card-bg: #FFFFFF;
     --color-header-text: #3B2116;
 }
@@ -22,9 +22,20 @@ body {
     flex-direction: column;
     min-height: 100vh; /* Garante que o footer fique no final da página */
 }
+
+/* --- ALTERAÇÃO 1: Deixa o cabeçalho fixo no topo --- */
+header {
+    position: sticky; /* Faz o elemento "grudar" na tela */
+    top: 0;           /* Define que ele deve grudar no topo (posição 0) */
+    z-index: 999;     /* Garante que o header fique sobre os outros conteúdos */
+}
+
+/* --- ALTERAÇÃO 2: Adiciona espaço para o cabeçalho fixo --- */
 .main-container{
     flex-grow: 1;
+    padding-top: 5.5rem; /* Adicionado para evitar que o conteúdo comece embaixo do header */
 }
+
 /* --- Componentes do Header --- */
 .main-nav {
     background-color: var(--color-brand-yellow);
@@ -232,7 +243,7 @@ body {
 .payment-icon.elo { height: 1.25rem; }
 .payment-icon.hipercard { height: 2rem; }
 .payment-icon.paypal { height: 1.5rem; }
-/* Adicione em css/base.css para garantir que funcione em todas as páginas */
+
 .product-card-link {
     text-decoration: none; /* Remove o sublinhado */
     color: inherit; /* Faz o texto do link herdar a cor normal */
@@ -297,7 +308,6 @@ body {
 .quantity-selector {
     display: flex;
     align-items: center;
-    border: 1px solid #d1d5db;
     border-radius: 8px;
     overflow: hidden; /* Garante que os botões fiquem dentro das bordas arredondadas */
 }
@@ -338,4 +348,3 @@ body {
     align-items: center;
     gap: 1rem;
 }
-

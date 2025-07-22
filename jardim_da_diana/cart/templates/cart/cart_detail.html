@@ -26,7 +26,7 @@
                     <tbody>
                         {% for item in cart %}
                             <tr data-product-id="{{ item.product.id }}">
-                                <td colspan="2">
+                                <td class="td-produto" colspan="2">
                                     <div class="produto-cell">
                                         <a href="{% url 'produto-detalhe' pk=item.product.id %}">
                                             {% if item.product.imagem %}<img src="{{ item.product.imagem.url }}" class="cart-image">{% endif %}
@@ -34,15 +34,15 @@
                                         <a href="{% url 'produto-detalhe' pk=item.product.id %}" class="produto-nome">{{ item.product.nome }}</a>
                                     </div>
                                 </td>
-                                <td class="td-quantidade">
+                                <td class="td-quantidade" data-label="Quantidade">
                                     <div class="quantity-selector">
                                         <button type="button" class="quantity-btn minus" data-product-id="{{ item.product.id }}">-</button>
                                         <input type="number" value="{{ item.quantity }}" min="1" max="99" class="quantity-input" readonly>
                                         <button type="button" class="quantity-btn plus" data-product-id="{{ item.product.id }}">+</button>
                                     </div>
                                 </td>
-                                <td class="num">R$ {{ item.price|floatformat:2 }}</td>
-                                <td class="num item-subtotal">R$ {{ item.total_price|floatformat:2 }}</td>
+                                <td class="num" data-label="Preço Unit.">R$ {{ item.price|floatformat:2 }}</td>
+                                <td class="num item-subtotal" data-label="Subtotal">R$ {{ item.total_price|floatformat:2 }}</td>
                                 <td class="td-remover"><a href="{% url 'cart:cart_remove' item.product.id %}" class="remove-link" title="Remover item">&times;</a></td>
                             </tr>
                         {% endfor %}
