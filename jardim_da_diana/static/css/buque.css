@@ -1,45 +1,57 @@
 /* --- Estilos da Página de Categoria (Buquês) --- */
+body {
+    background-color: #FAF8F5;
+}
 
+/* MUDANÇA APLICADA AQUI */
 .main-container {
-    padding-top: 3rem;
-    padding-bottom: 5rem;
+    /* Diminuímos o padding superior de 2rem para 1rem */
+    padding: 1rem 1rem 4rem;
 }
 
 .section-title {
-    text-align: left;
-    margin-bottom: 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 2.25rem;
+    color: var(--color-brand-brown, #A07855);
+    font-weight: 600;
 }
 
-/* --- Grid de Produtos com 3 Colunas --- */
+/* --- Grid de Produtos --- */
 .products-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 1.5rem;
-    max-width: 1100px;
+    gap: 2rem;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
 /* --- Card de Produto --- */
+.product-card-link {
+    text-decoration: none;
+}
+
 .product-card {
-    background-color: #fdfdfa;
-    border: 1px solid #e7e5e1;
-    border-radius: 12px;
+    background-color: #ffffff;
+    border-radius: 16px;
     overflow: hidden;
     text-align: center;
     display: flex;
     flex-direction: column;
     height: 100%;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
     opacity: 0;
     transform: translateY(20px);
     animation: fadeInUp 0.5s ease-out forwards;
 }
 
-/* Animação de entrada dos cards */
-{% for i in '123456789'|make_list %}
-.product-card-link:nth-child({{ i }}) .product-card {
-    animation-delay: {{ i|add:"-1"|multiply:0.1 }}s;
+.product-card-link:hover .product-card {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
 }
-{% endfor %}
+
+
 
 @keyframes fadeInUp {
     to {
@@ -48,46 +60,42 @@
     }
 }
 
-/* Wrapper da imagem com placeholder */
+/* --- Imagem do Produto --- */
 .product-image-wrapper {
     position: relative;
     overflow: hidden;
-    background-color: #f5f3ef;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    aspect-ratio: 1 / 1;
 }
 
 .product-card img {
     width: 100%;
+    height: 100%;
     display: block;
-    
-    /* MUDANÇA AQUI: Imagem agora é quadrada */
-    aspect-ratio: 1 / 1; 
-    
     object-fit: cover;
-    opacity: 0;
-    transition: opacity 0.5s ease-out;
-}
-
-.product-card img:not([src=""]) {
-    opacity: 1;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-radius: 8px;
 }
 
 .product-card-link:hover .product-card img {
-    transform: scale(1.1);
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transform: scale(1.08);
 }
 
+/* --- Overlay da Imagem --- */
 .product-image-overlay {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.3);
+    top: 1.5rem;
+    left: 1.5rem;
+    right: 1.5rem;
+    bottom: 1.5rem;
+    background-color: rgba(0, 0, 0, 0.35);
     display: flex;
     align-items: center;
     justify-content: center;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
+    border-radius: 8px;
 }
 
 .product-card-link:hover .product-image-overlay {
@@ -95,33 +103,36 @@
 }
 
 .overlay-button {
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     background-color: white;
     color: var(--color-header-text, #3B2116);
     border: none;
     border-radius: 50px;
     font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* --- Informações do Produto --- */
 .product-card-info {
-    padding: 1rem;
+    padding: 1.25rem; 
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    justify-content: flex-start; 
 }
 
 .product-card-info p {
-    font-size: 1rem;
+    font-size: 1.1rem;
     color: var(--color-header-text, #3B2116);
-    margin: 0;
-    flex-grow: 1;
+    margin: 0 0 0.5rem 0;
+    font-weight: 500;
 }
 
 .product-card-info .price {
-    font-size: 1.125rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     color: var(--color-brand-brown, #A07855);
-    margin-top: 0.5rem;
 }
 
 
@@ -129,6 +140,7 @@
 @media (max-width: 1024px) {
     .products-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
     }
 }
 
@@ -137,6 +149,18 @@
         grid-template-columns: 1fr;
     }
     .section-title {
-        text-align: center;
+        font-size: 1.8rem;
+    }
+     .main-container {
+        padding: 1rem 1rem 3rem;
+    }
+    .product-image-wrapper {
+        padding: 1rem;
+    }
+    .product-image-overlay {
+        top: 1rem;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
     }
 }
