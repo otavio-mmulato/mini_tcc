@@ -8,30 +8,17 @@ from .serializers import CategoriaSerializer, ProdutoSerializer
 # --- Views Principais ---
 
 def home_view(request):
-    """
-    Renderiza a página inicial com o carrossel de mais vendidos.
-    """
     produtos_mais_vendidos = Produto.objects.filter(is_mais_vendido=True)
-    context = {
-        'produtos': produtos_mais_vendidos,
-    }
+    context = { 'produtos': produtos_mais_vendidos, }
     return render(request, 'produtos/index.html', context)
 
 def sobre_nos_view(request):
-    """
-    Renderiza a página 'Sobre Nós'.
-    """
     return render(request, 'produtos/about_us.html')
 
 def produto_detalhe_view(request, pk):
-    """
-    Mostra a página de detalhes de um único produto.
-    """
     produto = get_object_or_404(Produto, pk=pk)
-    context = {
-        'produto': produto,
-    }
-    return render(request, 'produtos/produto_detalhe.html', context) # Corrigido de product_view.html
+    context = { 'produto': produto, }
+    return render(request, 'produtos/product_view.html', context)
 
 
 # --- Views de Categoria (COM PAGINAÇÃO) ---
@@ -42,15 +29,10 @@ def buques_view(request):
         lista_de_produtos = Produto.objects.filter(categoria=categoria)
     except Categoria.DoesNotExist:
         lista_de_produtos = []
-
     paginator = Paginator(lista_de_produtos, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-
-    context = {
-        'page_obj': page_obj,
-        'titulo_da_pagina': 'Buquês'
-    }
+    context = { 'page_obj': page_obj, 'titulo_da_pagina': 'Buquês' }
     return render(request, 'produtos/buque.html', context)
 
 def presentes_view(request):
@@ -59,15 +41,10 @@ def presentes_view(request):
         lista_de_produtos = Produto.objects.filter(categoria=categoria)
     except Categoria.DoesNotExist:
         lista_de_produtos = []
-
     paginator = Paginator(lista_de_produtos, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'page_obj': page_obj,
-        'titulo_da_pagina': 'Presentes'
-    }
+    context = { 'page_obj': page_obj, 'titulo_da_pagina': 'Presentes' }
     return render(request, 'produtos/presente.html', context)
 
 def jardinagem_view(request):
@@ -76,15 +53,10 @@ def jardinagem_view(request):
         lista_de_produtos = Produto.objects.filter(categoria=categoria)
     except Categoria.DoesNotExist:
         lista_de_produtos = []
-
     paginator = Paginator(lista_de_produtos, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'page_obj': page_obj,
-        'titulo_da_pagina': 'Itens de Jardinagem'
-    }
+    context = { 'page_obj': page_obj, 'titulo_da_pagina': 'Itens de Jardinagem' }
     return render(request, 'produtos/jardinagem.html', context)
 
 def suculentas_view(request):
@@ -93,25 +65,21 @@ def suculentas_view(request):
         lista_de_produtos = Produto.objects.filter(categoria=categoria)
     except Categoria.DoesNotExist:
         lista_de_produtos = []
-
     paginator = Paginator(lista_de_produtos, 9)
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
-    
-    context = {
-        'page_obj': page_obj,
-        'titulo_da_pagina': 'Suculentas'
-    }
-    return render(request, 'produtos/suculentas.html', context) # Corrigido de suculenta.html
+    context = { 'page_obj': page_obj, 'titulo_da_pagina': 'Suculentas' }
+    return render(request, 'produtos/suculentas.html', context)
 
 
-# --- View de Busca (COM PAGINAÇÃO) ---
+# --- View de Busca (COM PAGINAÇÃO E CORREÇÃO) ---
 
 def search_view(request):
     query = request.GET.get('q', '')
     if query:
+        # CORREÇÃO AQUI: trocamos __iexact por __icontains
         lista_de_produtos = Produto.objects.filter(
-            Q(nome__iexact=query) | Q(descricao__icontains=query)
+            Q(nome__icontains=query) | Q(descricao__icontains=query)
         ).distinct()
     else:
         lista_de_produtos = []
@@ -146,6 +114,6 @@ class ProdutoDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
 
-class MaisVendidosList(generics.ListAPIView):
+class MaisVendidosList(generics.ListCreateAPIView):
     queryset = Produto.objects.filter(is_mais_vendido=True)
     serializer_class = ProdutoSerializer

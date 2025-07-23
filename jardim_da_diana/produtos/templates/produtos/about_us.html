@@ -1,0 +1,56 @@
+{% extends "produtos/base.html" %}
+{% load static %}
+
+{% block title %}Sobre Nós - Jardim da Diana{% endblock %}
+
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/about_us.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main-container">
+
+    <article class="about-us-card">
+        
+        <div class="about-us-header">
+            <h1 class="about-us-title">Sobre Nós</h1>
+            <hr class="divider">
+        </div>
+        <section class="about-us-content">
+            
+            <figure class="mascot-figure">
+                <img src="{% static 'src/mascote_2.jpg' %}" alt="Diana, a calopsita mascote" class="mascot-image">
+            </figure>
+
+            <p>
+                Nossa história floresceu a partir de uma inspiração singela: Diana, nossa calopsita mascote. Foi observando a delicadeza com que ela interage com as plantas que a fundadora, Luciana Falcão, idealizou um espaço onde o acolhimento, a beleza e a natureza pudessem transformar o dia a dia das pessoas.
+            </p>
+            <p>
+                Em meio a um período de desafios, Luciana encontrou no jogo de simulação <em>Stardew Valley</em> a semente para criar um jardim real — um lugar onde cada planta contasse uma história e cada detalhe fosse cultivado com carinho. Com a coragem de quem dá o primeiro passo, ela vendeu seu videogame e, em 05 de julho de 2023, deu vida ao Jardim da Diana.
+            </p>
+
+        </section>
+
+        <section class="founder-section">
+            <figure>
+                <img src="{% static 'src/luciana_creator.png' %}" alt="Luciana, fundadora do Jardim da Diana" class="founder-image">
+                <figcaption class="founder-caption">Luciana, Fundadora</figcaption>
+            </figure>
+        </section>
+        
+        <section class="about-us-mission">
+            <p>
+                Desde então, nosso propósito é claro: oferecer bem-estar, leveza e conexão com a natureza. Trabalhamos com amor pelas plantas, respeito pelas histórias de cada cliente e coragem para transformar desafios em flores. Nosso atendimento é guiado pela delicadeza e pelo desejo genuíno de fazer cada pessoa se sentir em casa.
+            </p>
+            <p>
+                Com uma identidade visual pixelada que une a nostalgia dos jogos à sensibilidade da nossa proposta, o Jardim da Diana é mais do que uma simples floricultura. É um refúgio afetivo, criado por quem acredita que os menores gestos — como o caminhar de uma calopsita entre as flores — têm o poder de transformar o dia de alguém.
+            </p>
+            <p class="final-message">
+                Seja bem-vindo ao nosso jardim. Aqui, cada flor carrega um afeto e cada planta representa um novo começo.
+            </p>
+        </section>
+
+    </article>
+
+</main>
+{% endblock %}

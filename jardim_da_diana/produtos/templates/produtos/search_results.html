@@ -4,7 +4,7 @@
 {% block title %}Busca por "{{ query }}"{% endblock %}
 
 {% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/buque.css' %}">
+    <link rel="stylesheet" href="{% static 'css/category_products_view.css' %}">
 {% endblock %}
 
 {% block content %}
@@ -16,7 +16,7 @@
     {% endif %}
 
     <div class="products-grid">
-        {% for produto in produtos %}
+        {% for produto in page_obj %}
             <a href="{% url 'produto-detalhe' pk=produto.pk %}" class="product-card-link">
                 <div class="product-card">
                     <div class="product-image-wrapper">
@@ -32,12 +32,31 @@
                         <span class="price">R$ {{ produto.preco|floatformat:2 }}</span>
                     </div>
                 </div>
-            </a>
+                </a>
         {% empty %}
             {% if query %}
-                <p>Nenhum produto encontrado com o termo "{{ query }}". Tente buscar por outra palavra.</p>
+                <p style="text-align: center; grid-column: 1 / -1;">Nenhum produto encontrado com o termo "{{ query }}". Tente buscar por outra palavra.</p>
             {% endif %}
         {% endfor %}
     </div>
+
+    {% if page_obj.has_paginator and page_obj.paginator.num_pages > 1 %}
+    <nav class="pagination">
+        <div class="pagination-links">
+            {% if page_obj.has_previous %}
+                <a href="?q={{ query }}&page={{ page_obj.previous_page_number }}">&laquo; Anterior</a>
+            {% endif %}
+
+            <span class="current-page">
+                Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?q={{ query }}&page={{ page_obj.next_page_number }}">Próxima &raquo;</a>
+            {% endif %}
+        </div>
+    </nav>
+    {% endif %}
+
 </main>
 {% endblock %}

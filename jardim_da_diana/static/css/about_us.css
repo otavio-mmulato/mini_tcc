@@ -1,0 +1,144 @@
+/* ==============================================
+CORREÇÃO PARA EVITAR SOBREPOSIÇÃO DO HEADER
+==============================================
+*/
+.main-container {
+    /* Zeramos o padding e margin do container, pois o controle do
+       espaçamento será feito diretamente no card abaixo.
+    */
+    padding-top: 0;
+    margin-top: 0; 
+}
+
+
+/* --- Estilos específicos da página Sobre Nós --- */
+
+.about-us-card {
+    background-color: #fffcf5;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+    padding: 3rem 4rem;
+    max-width: 800px;
+    border: 1px solid #eee;
+
+    /* =================================================================
+       SOLUÇÃO FINAL PARA O ESPAÇAMENTO
+       - O primeiro valor (40px) define a distância para o header.
+       - Altere este valor para mais ou menos espaço conforme desejar.
+       - O !important garante que esta regra seja sempre aplicada.
+    ================================================================= */
+    margin: 40px auto 2rem auto !important; 
+}
+
+/* --- Cabeçalho do Card "Sobre Nós" --- */
+.about-us-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.about-us-title {
+    color: var(--color-brand-brown);
+    font-family: var(--font-serif);
+    font-size: 2.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.divider {
+    width: 80px;
+    height: 3px;
+    background-color: var(--color-brand-yellow);
+    margin: 1rem auto 0 auto;
+    border: none;
+}
+
+/* --- Conteúdo e Parágrafos --- */
+.about-us-content,
+.about-us-mission {
+    font-size: 1.1rem;
+    line-height: 1.9;
+    color: var(--color-header-text);
+    text-align: justify;
+}
+
+.about-us-content p,
+.about-us-mission p {
+    margin-bottom: 1.5rem;
+}
+
+.final-message {
+    text-align: center;
+    font-style: italic;
+    margin-top: 3rem;
+    color: #9c5d27;
+}
+
+/* --- Imagem da Mascote --- */
+.mascot-figure {
+    float: left;
+    margin-right: 2rem;
+    margin-bottom: 1rem;
+}
+
+.mascot-image {
+    width: 170px;
+    height: 170px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 5px solid #fff;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Seção da Fundadora --- */
+.founder-section {
+    text-align: center;
+    margin: 3.5rem 0;
+    clear: both; /* Limpa o float da imagem da mascote */
+}
+
+.founder-section figure {
+    margin: 0;
+}
+
+.founder-image {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    border: 6px solid #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+}
+
+.founder-caption {
+    margin-top: 1.2rem;
+    font-style: italic;
+    color: var(--color-brand-brown);
+    font-size: 1.1rem;
+}
+
+/* --- Responsividade para o card "Sobre Nós" --- */
+@media (max-width: 768px) {
+    .about-us-card {
+        padding: 2rem;
+        margin: 1rem !important; /* Margem menor para telas pequenas */
+    }
+
+    .about-us-title {
+        font-size: 2.2rem;
+    }
+
+    .about-us-content,
+    .about-us-mission {
+        font-size: 1rem;
+        text-align: left;
+    }
+
+    .mascot-figure {
+        float: none;
+        display: block;
+        text-align: center;
+        margin: 0 auto 2rem auto;
+    }
+}
