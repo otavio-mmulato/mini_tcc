@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Presentes - Jardim da Diana</title>
+        
+        <link rel="stylesheet" href="{% static 'css/base.css' %}">
+        <link rel="stylesheet" href="{% static 'css/category_products_view.css' %}"> 
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+        
+        <link rel="icon" type="image/png" href="{% static 'src/diana.png' %}" sizes="180x180"/>
+    </head>
+<body>
+    {% include 'produtos/header.html' %} 
+
+    <main class="main-container">
+        <h2 class="section-title">{{ titulo_da_pagina|default:"Presentes" }}</h2>
+
+        <div class="products-grid"> 
+            
+            {% for produto in page_obj %}
+                <a href="{% url 'produto-detalhe' pk=produto.pk %}" class="product-card-link">
+                    <div class="product-card">
+                        <div class="product-image-wrapper">
+                            {% if produto.imagem %}
+                                <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}" loading="lazy">
+                            {% endif %}
+                            <div class="product-image-overlay">
+                                <span class="overlay-button">Ver Detalhes</span>
+                            </div>
+                        </div>
+                        <div class="product-card-info">
+                            <p>{{ produto.nome }}</p>
+                            <span class="price">R$ {{ produto.preco|floatformat:2 }}</span>
+                        </div>
+                    </div>
+                </a>
+            {% empty %}
+                <p>Nenhum produto encontrado nesta categoria.</p>
+            {% endfor %}
+
+        </div>
+
+        <nav class="pagination">
+            <div class="pagination-links">
+                {% if page_obj.has_previous %}
+                    <a href="?page={{ page_obj.previous_page_number }}">&laquo; Anterior</a>
+                {% endif %}
+
+                <span class="current-page">
+                    Página {{ page_obj.number }} de {{ page_obj.paginator.num_pages }}.
+                </span>
+
+                {% if page_obj.has_next %}
+                    <a href="?page={{ page_obj.next_page_number }}">Próxima &raquo;</a>
+                {% endif %}
+            </div>
+        </nav>
+    </main>
+
+    {% include 'produtos/footer.html' %} 
+</body>
+</html>

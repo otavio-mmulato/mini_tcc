@@ -1,16 +1,15 @@
-# produtos/views.py
-
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.core.paginator import Paginator
+from django.db.models import Q
 from rest_framework import generics
 from .models import Categoria, Produto
 from .serializers import CategoriaSerializer, ProdutoSerializer
-from django.shortcuts import render, get_object_or_404
-from django.db.models import Q
-# --- View para a Página Principal ---
+
+# --- Views Principais ---
+
 def home_view(request):
     """
-    Esta view renderiza o template da página inicial, passando os
-    produtos marcados como 'mais vendido' para o carrossel.
+    Renderiza a página inicial com o carrossel de mais vendidos.
     """
     produtos_mais_vendidos = Produto.objects.filter(is_mais_vendido=True)
     context = {
@@ -18,8 +17,119 @@ def home_view(request):
     }
     return render(request, 'produtos/index.html', context)
 
+def sobre_nos_view(request):
+    """
+    Renderiza a página 'Sobre Nós'.
+    """
+    return render(request, 'produtos/about_us.html')
 
-# --- Views da sua API (continuam aqui para uso futuro) ---
+def produto_detalhe_view(request, pk):
+    """
+    Mostra a página de detalhes de um único produto.
+    """
+    produto = get_object_or_404(Produto, pk=pk)
+    context = {
+        'produto': produto,
+    }
+    return render(request, 'produtos/produto_detalhe.html', context) # Corrigido de product_view.html
+
+
+# --- Views de Categoria (COM PAGINAÇÃO) ---
+
+def buques_view(request):
+    try:
+        categoria = Categoria.objects.get(nome__iexact="Buquês")
+        lista_de_produtos = Produto.objects.filter(categoria=categoria)
+    except Categoria.DoesNotExist:
+        lista_de_produtos = []
+
+    paginator = Paginator(lista_de_produtos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+        'titulo_da_pagina': 'Buquês'
+    }
+    return render(request, 'produtos/buque.html', context)
+
+def presentes_view(request):
+    try:
+        categoria = Categoria.objects.get(nome__iexact="Presentes")
+        lista_de_produtos = Produto.objects.filter(categoria=categoria)
+    except Categoria.DoesNotExist:
+        lista_de_produtos = []
+
+    paginator = Paginator(lista_de_produtos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'titulo_da_pagina': 'Presentes'
+    }
+    return render(request, 'produtos/presente.html', context)
+
+def jardinagem_view(request):
+    try:
+        categoria = Categoria.objects.get(nome__iexact="Jardinagem")
+        lista_de_produtos = Produto.objects.filter(categoria=categoria)
+    except Categoria.DoesNotExist:
+        lista_de_produtos = []
+
+    paginator = Paginator(lista_de_produtos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'titulo_da_pagina': 'Itens de Jardinagem'
+    }
+    return render(request, 'produtos/jardinagem.html', context)
+
+def suculentas_view(request):
+    try:
+        categoria = Categoria.objects.get(nome__iexact="Suculentas")
+        lista_de_produtos = Produto.objects.filter(categoria=categoria)
+    except Categoria.DoesNotExist:
+        lista_de_produtos = []
+
+    paginator = Paginator(lista_de_produtos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'page_obj': page_obj,
+        'titulo_da_pagina': 'Suculentas'
+    }
+    return render(request, 'produtos/suculentas.html', context) # Corrigido de suculenta.html
+
+
+# --- View de Busca (COM PAGINAÇÃO) ---
+
+def search_view(request):
+    query = request.GET.get('q', '')
+    if query:
+        lista_de_produtos = Produto.objects.filter(
+            Q(nome__iexact=query) | Q(descricao__icontains=query)
+        ).distinct()
+    else:
+        lista_de_produtos = []
+
+    paginator = Paginator(lista_de_produtos, 9)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+    context = {
+        'page_obj': page_obj,
+        'query': query,
+        'titulo_da_pagina': f'Busca por "{query}"'
+    }
+    return render(request, 'produtos/search_results.html', context)
+
+
+# --- Views da sua API (sem alterações) ---
+
 class CategoriaList(generics.ListCreateAPIView):
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
@@ -37,91 +147,5 @@ class ProdutoDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = ProdutoSerializer
 
 class MaisVendidosList(generics.ListAPIView):
-    """
-    API endpoint que retorna uma lista de produtos
-    marcados como 'mais vendido'.
-    """
     queryset = Produto.objects.filter(is_mais_vendido=True)
     serializer_class = ProdutoSerializer
-
-def buques_view(request):
-    try:
-        categoria_buques = Categoria.objects.get(nome__iexact="Buquês")
-        produtos_da_categoria = Produto.objects.filter(categoria=categoria_buques)
-    except Categoria.DoesNotExist:
-        produtos_da_categoria = []
-    
-    context = {
-        'produtos': produtos_da_categoria,
-        'titulo_da_pagina': 'Buquês'
-    }
-    return render(request, 'produtos/buque.html', context)
-
-def presentes_view(request):
-    try:
-        categoria_presentes = Categoria.objects.get(nome__iexact="Presentes")
-        produtos_da_categoria = Produto.objects.filter(categoria=categoria_presentes)
-    except Categoria.DoesNotExist:
-        produtos_da_categoria = []
-    
-    context = {
-        'produtos': produtos_da_categoria,
-        'titulo_da_pagina': 'Presentes'
-    }
-    return render(request, 'produtos/presente.html', context)
-
-def jardinagem_view(request):
-    try:
-        categoria_jardinagem = Categoria.objects.get(nome__iexact="Jardinagem")
-        produtos_da_categoria = Produto.objects.filter(categoria=categoria_jardinagem)
-    except Categoria.DoesNotExist:
-        produtos_da_categoria = []
-    
-    context = {
-        'produtos': produtos_da_categoria,
-        'titulo_da_pagina': 'Jardinagem'
-    }
-    return render(request, 'produtos/jardinagem.html', context)
-
-def suculentas_view(request):
-    try:
-        categoria_suculentas = Categoria.objects.get(nome__iexact="Suculentas")
-        produtos_da_categoria = Produto.objects.filter(categoria=categoria_suculentas)
-    except Categoria.DoesNotExist:
-        produtos_da_categoria = []
-    
-    context = {
-        'produtos': produtos_da_categoria,
-        'titulo_da_pagina': 'Suculentas'
-    }
-    return render(request, 'produtos/suculenta.html', context)
-
-def sobre_nos_view(request):
-    return render(request, 'produtos/about_us.html')
-
-def produto_detalhe_view(request, pk):
-    produto = get_object_or_404(Produto, pk=pk)
-
-    context = {
-        'produto': produto,
-    }
-    return render(request, 'produtos/product_view.html', context)
-
-def search_view(request):
-    query = request.GET.get('q', '') # Pega o termo da busca da URL (ex: ?q=rosas)
-    
-    if query:
-        # Busca produtos onde o nome OU a descrição contenham a query.
-        # O 'icontains' torna a busca case-insensitive (não diferencia maiúsculas/minúsculas).
-        produtos_encontrados = Produto.objects.filter(
-            Q(nome__icontains=query) | Q(descricao__icontains=query)
-        ).distinct()
-    else:
-        produtos_encontrados = []
-
-    context = {
-        'produtos': produtos_encontrados,
-        'query': query, # Enviamos a query de volta para mostrar na página
-        'titulo_da_pagina': f'Busca por "{query}"'
-    }
-    return render(request, 'produtos/search_results.html', context)

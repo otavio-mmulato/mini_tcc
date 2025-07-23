@@ -1,6 +1,11 @@
 /* --- Estilos da Página de Categoria (Buquês) --- */
+.pagination {
+    margin-top: 5rem; /* Aumentamos de 3rem para 5rem */
+    text-align: center;
+}
+
 body {
-    background-color: #FAF8F5;
+    background-color: var(--color-brand-bg);
 }
 
 /* MUDANÇA APLICADA AQUI */
