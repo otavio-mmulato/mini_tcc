@@ -16,7 +16,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Static files (favicon, CSS, JS, imagens)
 STATIC_URL = '/static/'
-import os
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
@@ -26,12 +25,18 @@ SECRET_KEY = 'django-insecure-we(g3hxs$fn@lc9v$xzcz3+tn^1fn++6_yfq@zd@d1ywhnpifv
 DEBUG = True
 ALLOWED_HOSTS = []
 
-# CORS
-CORS_ALLOW_ALL_ORIGINS = True
+# ================================================================
+#                       CONFIGURAÇÕES DE CORS
+# ================================================================
+# CORRIGIDO: Removida a linha 'CORS_ALLOW_ALL_ORIGINS' que é menos segura.
+#            Mantida apenas a lista de origens permitidas.
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5500",
 ]
+
+# ID da sessão para o carrinho de compras
 CART_SESSION_ID = 'carrinho'
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -102,13 +107,33 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-# Internationalization
-LANGUAGE_CODE = 'en-us'
-TIME_ZONE = 'UTC'
+# ================================================================
+#                  IDIOMA E FUSO HORÁRIO
+# ================================================================
+# CORRIGIDO: Ajustado para Português do Brasil e fuso de São Paulo.
+LANGUAGE_CODE = 'pt-br'
+TIME_ZONE = 'America/Sao_Paulo'
 USE_I18N = True
 USE_TZ = True
 
+# Configura o Django para 'enviar' e-mails para o console/terminal
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 # Default primary key field type
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# Adicione ao final de settings.py
-CORS_ALLOW_ALL_ORIGINS = True
+
+# ================================================================
+#       CONFIGURAÇÕES GLOBAIS DE AUTENTICAÇÃO
+# ================================================================
+# ATENÇÃO: As rotas abaixo são customizadas. Garanta que seu arquivo
+#          `urls.py` tenha padrões de URL que correspondam a elas.
+
+# 1. Para onde redirecionar APÓS O LOGIN BEM-SUCEDIDO.
+LOGIN_REDIRECT_URL = '/'
+
+# 2. Para onde redirecionar APÓS O LOGOUT.
+LOGOUT_REDIRECT_URL = '/auth/login/'
+
+# 3. Qual é a URL da sua página de login.
+#    Usado pelo @login_required para saber para onde enviar usuários não logados.
+LOGIN_URL = '/auth/login/'

@@ -1,0 +1,38 @@
+{% extends "produtos/base.html" %}
+{% load static %}
+
+{% block title %}Meu Perfil - Jardim da Diana{% endblock %}
+
+{% block extra_css %}
+    <!-- Link para o arquivo CSS separado -->
+    <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="main-container">
+
+    <div class="profile-card-new">
+
+        <!-- Imagem pura, sem círculo -->
+        <img src="{% static 'src/diana.png' %}" alt="Ícone de Perfil" class="profile-image-normal">
+
+        <!-- Nome do usuário como título -->
+        <h1 class="profile-username-title">{{ user.username }}</h1>
+
+        <!-- Detalhes do perfil que parecem campos -->
+        <div class="profile-details">
+            <div class="profile-field" title="Nome de usuário">{{ user.username }}</div>
+            <div class="profile-field" title="E-mail">{{ user.email }}</div>
+            <div class="profile-field password-field">
+                <span>********</span>
+                <a href="{% url 'password_change' %}" title="Alterar senha">Alterar</a>
+            </div>
+        </div>
+
+        <!-- Botão de Sair (Logout) -->
+        <a href="{% url 'logout' %}" class="logout-button-new">Sair</a>
+
+    </div>
+
+</main>
+{% endblock %}

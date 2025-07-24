@@ -1,41 +1,56 @@
-# jardim_da_diana/urls.py
+# Arquivo: jardim_da_diana/urls.py (O SEU ARQUIVO PRINCIPAL)
+# VERSÃO CORRIGIDA E ORGANIZADA
 
 from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
-from produtos.views import home_view, buques_view, presentes_view, jardinagem_view, suculentas_view, sobre_nos_view, produto_detalhe_view, search_view # Importa a view da sua página inicial
+
+# --- CORREÇÃO AQUI ---
+# 1. Importe APENAS as views que pertencem ao app 'produtos'
+from produtos.views import (
+home_view, 
+buques_view, 
+presentes_view, 
+jardinagem_view, 
+suculentas_view, 
+sobre_nos_view, 
+produto_detalhe_view, 
+search_view
+)
+# As views de usuário (login, perfil, etc.) não são mais importadas aqui.
+# Elas serão gerenciadas pelo 'include' abaixo.
 
 urlpatterns = [
-    # Rota para o painel de administração
-    path('admin/', admin.site.urls),
+# Rota para o painel de administração
+path('admin/', admin.site.urls),
 
-    # Rota para a sua página inicial (a raiz do site)
-    path('', home_view, name='home'),
+# --- ROTAS DE PRODUTOS E PÁGINAS GERAIS ---
+path('', home_view, name='home'),
+path('buques/', buques_view, name='buques'),
+path('presentes/', presentes_view, name='presentes'),
+path('jardinagem/', jardinagem_view, name='jardinagem'),
+path('suculentas/', suculentas_view, name='suculentas'),
+path('sobre-nos/', sobre_nos_view, name='sobre-nos'),
+path('produto/<int:pk>/', produto_detalhe_view, name='produto-detalhe'),
+path('busca/', search_view, name='search'),
 
-    # Delega as rotas de API para o app 'produtos'
-    path('api/', include('produtos.urls')),
+# --- ROTAS DE APPS SEPARADOS (MELHOR PRÁTICA) ---
 
-    # Delega as rotas de autenticação para o app 'usuarios'
-    path('auth/', include('usuarios.urls')),
+# Delega TODAS as rotas de autenticação (login, cadastro, perfil, logout)
+# para o arquivo 'urls.py' do app 'usuarios'.
+# O prefixo '/auth/' será adicionado a todas as URLs de lá.
+path('auth/', include('usuarios.urls')),
 
-    path('busca/', search_view, name='search'),
+# Delega as rotas de API para o app 'produtos'
+path('api/', include('produtos.urls')),
 
-    path('sacola/', include('cart.urls')),  # Rota para o carrinho de compras
+# Delega as rotas do carrinho para o app 'cart'
+path('sacola/', include('cart.urls')),
 
-    path('buques/', buques_view, name='buques'),  # Rota para a página de buquês
-
-    path('presentes/', presentes_view, name='presentes'),  # Rota para a página de presentes
-
-    path('jardinagem/', jardinagem_view, name='jardinagem'),  # Rota para a página de jardinagem
-    
-    path('suculentas/', suculentas_view, name='suculentas'),
-
-    path('sobre-nos/', sobre_nos_view, name='sobre-nos'),  # Rota para a página "Sobre Nós"
-
-    path('produto/<int:pk>/', produto_detalhe_view, name='produto-detalhe')
+path('accounts/', include('django.contrib.auth.urls')),  # URLs de autenticação do Django
 ]
 
-# Configuração para servir arquivos de mídia (imagens dos produtos)
+# Configuração para servir arquivos de mídia em modo de desenvolvimento
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,114 @@
+/* ===================================================
+   SEUS ESTILOS ORIGINAIS PARA DESKTOP
+   =================================================== */
+.profile-card-new {
+  max-width: 450px;
+  margin: -55px auto; 
+  padding: 40px;
+  background-color: #fffcf5;
+  border-radius: 15px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  border: 1px solid #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.profile-image-normal {
+  width: 130px;
+  height: auto;
+  margin-bottom: 25px;
+}
+
+.profile-username-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.8rem;
+  color: #333;
+  margin-bottom: 35px;
+}
+
+.profile-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 40px;
+}
+
+.profile-field {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 15px;
+  font-size: 1rem;
+  font-family: 'Poppins', sans-serif;
+  text-align: left;
+  color: #555;
+}
+
+.profile-field.password-field {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.profile-field.password-field a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.profile-field.password-field a:hover {
+  text-decoration: underline;
+}
+
+.logout-button-new {
+  background-color: #d9534f;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.logout-button-new:hover {
+  background-color: #c9302c;
+}
+
+
+/* ===================================================
+   ✨ NOVO BLOCO RESPONSIVO PARA CELULARES ✨
+   (Para telas com 768px de largura ou menos)
+   =================================================== */
+@media screen and (max-width: 768px) {
+
+  .profile-card-new {
+    /* Garante que o card não toque as bordas da tela */
+    max-width: 90%; 
+    
+    /* Ajusta a margem e o padding para um visual mais compacto */
+    margin: 20px auto; 
+    padding: 25px;
+  }
+
+  .profile-image-normal {
+    /* Diminui a imagem no celular */
+    width: 100px; 
+  }
+
+  .profile-username-title {
+    /* Reduz drasticamente a fonte do título para caber na tela */
+    font-size: 2rem; 
+    margin-bottom: 25px;
+  }
+
+  .profile-details {
+    /* Reduz a margem inferior para economizar espaço */
+    margin-bottom: 30px; 
+  }
+}
