@@ -3,79 +3,134 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.getElementById('next-btn');
     const prevButton = document.getElementById('prev-btn');
 
-    // Se o carrossel ou os produtos não existirem, o script para.
     if (!track || !nextButton || !prevButton || track.children.length === 0) {
         if (track && track.children.length === 0) {
-            track.innerHTML = '<p>Nenhum produto em destaque no momento.</p>';
-            if (nextButton) nextButton.style.display = 'none';
-            if (prevButton) prevButton.style.display = 'none';
+            track.innerHTML = '<p style="padding: 0 2rem; text-align: center; width: 100%;">Nenhum produto em destaque no momento.</p>';
         }
+        if (nextButton) nextButton.style.display = 'none';
+        if (prevButton) prevButton.style.display = 'none';
         return;
     }
 
-    const originalCards = Array.from(track.children);
+    let originalCards = Array.from(track.children);
     let cardCount = originalCards.length;
-    let isMoving = false; // Flag para evitar cliques múltiplos durante a transição
+    let itemsToClone = Math.ceil(5 / (100 / parseFloat(track.querySelector('.product-card-link').style.width || 85))) || 5;
+    itemsToClone = Math.min(cardCount, itemsToClone);
 
-    // 1. Clonar os itens para criar o efeito infinito
-    // Adiciona os clones do final no início
-    originalCards.slice().reverse().forEach(card => {
-        track.prepend(card.cloneNode(true));
-    });
-    // Adiciona os clones do início no final
-    originalCards.slice().forEach(card => {
-        track.append(card.cloneNode(true));
-    });
-
-    let currentIndex = cardCount; // Começa no primeiro item da lista original
-
-    function updatePosition(withTransition = true) {
-        const card = track.querySelector('.product-card');
-        const gap = parseFloat(getComputedStyle(track).gap) || 24;
-        const cardWidth = card.offsetWidth;
-        const scrollAmount = cardWidth + gap;
-
-        // Aplica a transição ou a remove para o "salto" instantâneo
-        track.style.transition = withTransition ? 'transform 0.5s ease-in-out' : 'none';
-        track.style.transform = `translateX(-${currentIndex * scrollAmount}px)`;
+    // --- 1. LÓGICA DE CLONAGEM PARA EFEITO INFINITO ---
+    // Clona os primeiros itens e adiciona ao final
+    for (let i = 0; i < itemsToClone; i++) {
+        track.appendChild(originalCards[i].cloneNode(true));
+    }
+    // Clona os últimos itens e adiciona no início
+    for (let i = cardCount - 1; i >= cardCount - itemsToClone; i--) {
+        track.prepend(originalCards[i].cloneNode(true));
     }
 
-    // Posicionamento inicial sem animação
-    updatePosition(false);
+    let currentIndex = itemsToClone;
+    let isTransitioning = false;
+    let isDragging = false;
+    let startPos = 0;
+    let currentTranslate = 0;
+    let prevTranslate = 0;
+    let animationID;
 
-    // 2. Lógica dos botões
-    nextButton.addEventListener('click', () => {
-        if (isMoving) return;
-        isMoving = true;
-        currentIndex++;
-        updatePosition();
-    });
+    // --- 2. FUNÇÕES DE MOVIMENTO ---
+    const getCardWidth = () => track.querySelector('.product-card-link').offsetWidth;
+    const getGap = () => parseFloat(getComputedStyle(track).gap) || 24;
 
-    prevButton.addEventListener('click', () => {
-        if (isMoving) return;
-        isMoving = true;
-        currentIndex--;
-        updatePosition();
-    });
+    function setPositionByIndex() {
+        currentTranslate = currentIndex * -(getCardWidth() + getGap());
+        prevTranslate = currentTranslate;
+        track.style.transform = `translateX(${currentTranslate}px)`;
+    }
 
-    // 3. A "mágica" do loop infinito
-    // Ouve o evento que marca o fim da transição CSS
+    function setTransition(active = true) {
+        track.style.transition = active ? 'transform 0.5s ease-out' : 'none';
+    }
+
+    // Posicionamento inicial
+    setTransition(false);
+    setPositionByIndex();
+
+    // --- 3. EVENTOS DOS BOTÕES ---
+    nextButton.addEventListener('click', () => moveTo(currentIndex + 1));
+    prevButton.addEventListener('click', () => moveTo(currentIndex - 1));
+
+    function moveTo(index) {
+        if (isTransitioning) return;
+        isTransitioning = true;
+        currentIndex = index;
+        setTransition(true);
+        setPositionByIndex();
+    }
+
+    // --- 4. "MÁGICA" DO LOOP INFINITO ---
     track.addEventListener('transitionend', () => {
-        isMoving = false; // Permite o próximo clique
-
-        // Se o carrossel chegou no final da lista (nos clones do início)
-        if (currentIndex >= cardCount * 2) {
-            currentIndex = cardCount; // Volta para o primeiro item original
-            updatePosition(false); // Salto instantâneo, sem animação
+        isTransitioning = false;
+        if (currentIndex <= itemsToClone - 1) {
+            setTransition(false);
+            currentIndex += cardCount;
+            setPositionByIndex();
         }
-
-        // Se o carrossel chegou no início da lista (nos clones do final)
-        if (currentIndex <= cardCount - 1) {
-            currentIndex = cardCount * 2 - 1; // Volta para o último item original
-            updatePosition(false); // Salto instantâneo, sem animação
+        if (currentIndex >= cardCount + itemsToClone) {
+            setTransition(false);
+            currentIndex -= cardCount;
+            setPositionByIndex();
         }
     });
+    
+    // --- 5. LÓGICA DE ARRASTAR (DRAG & SWIPE) ---
+    track.addEventListener('mousedown', dragStart);
+    track.addEventListener('touchstart', dragStart, { passive: true });
 
-    // Atualiza o carrossel caso a janela seja redimensionada
-    window.addEventListener('resize', () => updatePosition(false));
+    track.addEventListener('mousemove', drag);
+    track.addEventListener('touchmove', drag, { passive: true });
+
+    track.addEventListener('mouseup', dragEnd);
+    track.addEventListener('mouseleave', dragEnd);
+    track.addEventListener('touchend', dragEnd);
+
+    function dragStart(event) {
+        if (isTransitioning) return;
+        isDragging = true;
+        startPos = getPositionX(event);
+        animationID = requestAnimationFrame(animation);
+        setTransition(false);
+    }
+
+    function drag(event) {
+        if (isDragging) {
+            const currentPosition = getPositionX(event);
+            currentTranslate = prevTranslate + currentPosition - startPos;
+        }
+    }
+
+    function dragEnd(event) {
+        if (!isDragging) return;
+        isDragging = false;
+        cancelAnimationFrame(animationID);
+
+        const movedBy = currentTranslate - prevTranslate;
+
+        // Se moveu mais de 50px, passa para o próximo slide
+        if (movedBy < -50 && currentIndex < cardCount + itemsToClone) moveTo(currentIndex + 1);
+        else if (movedBy > 50 && currentIndex > 0) moveTo(currentIndex - 1);
+        else moveTo(currentIndex); // Volta para a posição original
+    }
+    
+    function getPositionX(event) {
+        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+    }
+    
+    function animation() {
+        track.style.transform = `translateX(${currentTranslate}px)`;
+        if (isDragging) requestAnimationFrame(animation);
+    }
+    
+    // Recalcula a posição ao redimensionar a janela
+    window.addEventListener('resize', () => {
+        setTransition(false);
+        setPositionByIndex();
+    });
 });
