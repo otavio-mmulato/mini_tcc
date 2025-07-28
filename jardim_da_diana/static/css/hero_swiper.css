@@ -1,0 +1,29 @@
+.hero-swiper {
+    width: 100%;
+    height: 65vh; /* 65% da altura da tela */
+    min-height: 400px;
+}
+
+.swiper-slide {
+    /* Esta regra agora se aplica a TODOS os tamanhos de tela */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Estilizando as setas e bolinhas do Swiper */
+.swiper-button-prev,
+.swiper-button-next {
+    color: #fff;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.5);
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #fff;
+}
+
+/* Ajuste de altura para telas menores (A altura muda, mas o 'cover' continua) */
+@media (max-width: 768px) {
+    .hero-swiper {
+        height: 50vh;
+    }
+}

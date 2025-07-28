@@ -1,17 +1,13 @@
-/* css/home.css - Estilos específicos da página inicial (VERSÃO CORRIGIDA E COMPLETA) */
+/* css/home.css - Estilos específicos da página inicial */
 
 /* --- Variáveis --- */
 :root {
-    /* Cores existentes */
     --color-gray-800: #1f2937;
     --color-stone-700: #44403c;
-    /* Supondo que estas cores existam em seu arquivo de variáveis principal */
     --color-brand-brown: #80786C; 
     --color-card-bg: #ffffff;
-
-    /* Fontes do projeto */
-    --font-serif: 'Playfair Display', serif; /* Fonte para títulos */
-    --font-sans: 'Lato', sans-serif;         /* Fonte para o corpo do texto do conteúdo */
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
 }
 
 /* --- Container Principal e Seção de Depoimentos --- */
@@ -20,10 +16,14 @@
     font-family: var(--font-sans);
 }
 
+/* CORREÇÃO AQUI: 
+  Removemos o padding do topo do container principal APENAS na home page,
+  para que o carrossel de banners fique colado no header.
+*/
 .main-container {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 2rem 1rem 4rem 1rem;
+    padding: 0 1rem 3rem 1rem; /* Padding do topo zerado */
 }
 
 .section-title, 
@@ -37,9 +37,11 @@
 .section-title {
     font-size: 1.875rem;
     margin-bottom: 2rem;
+    /* Adicionamos um padding no topo para compensar a remoção do padding do container */
+    padding-top: 3rem; 
 }
 
-/* --- Estilos base do Product Card --- */
+/* --- Estilos base do Product Card (sem alteração) --- */
 .product-card {
     background-color: var(--color-card-bg);
     border-radius: 0.75rem;
@@ -51,231 +53,43 @@
     height: 100%;
     box-sizing: border-box;
 }
-.product-card:hover {
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-}
+.product-card:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
+.product-card img { width: 100%; height: 12rem; object-fit: contain; border-radius: 0.5rem; }
+.product-card p { font-size: 0.875rem; color: var(--color-gray-800); margin-top: 0.75rem; flex-grow: 1; }
+.product-card .price { font-weight: 700; font-size: 1rem; color: #80786C; margin-top: 0.25rem; }
 
-.product-card img {
-    width: 100%;
-    height: 12rem;
-    object-fit: contain;
-    border-radius: 0.5rem;
-}
 
-.product-card p {
-    font-size: 0.875rem;
-    color: var(--color-gray-800);
-    margin-top: 0.75rem;
-    flex-grow: 1;
-}
+/* --- ESTILOS DO CARROSSEL DE PRODUTOS (sem alteração) --- */
+.carousel-container { position: relative; width: 100%; box-sizing: border-box; padding: 0 40px; }
+.carousel-wrapper { width: 100%; overflow: hidden; -webkit-user-drag: none; user-select: none; }
+.carousel-track { display: flex; gap: 1.5rem; transition: transform 0.5s ease-in-out; }
+.product-card-link { text-decoration: none; color: inherit; display: block; flex: 0 0 85%; }
+.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); border: 1px solid var(--color-brand-brown); color: var(--color-brand-brown); border-radius: 50%; width: 40px; height: 40px; font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s, color 0.3s; }
+.carousel-btn:hover { background-color: var(--color-brand-brown); color: white; }
+.carousel-btn.prev { left: 0; }
+.carousel-btn.next { right: 0; }
+.carousel-btn:disabled { cursor: not-allowed; opacity: 0.4; }
 
-.product-card .price {
-    font-weight: 700;
-    font-size: 1rem;
-    color: #80786C;
-    margin-top: 0.25rem;
-}
 
-/* --- ESTILOS DO CARROSSEL (VERSÃO CORRIGIDA) --- */
-
-.carousel-container { 
-    position: relative; 
-    width: 100%; 
-    box-sizing: border-box; 
-    /* ADICIONADO: Garante espaço para os botões não saírem da tela. */
-    padding: 0 40px; 
-}
-
-.carousel-wrapper { 
-    width: 100%; 
-    overflow: hidden; 
-    /* Adicionado para desativar o clique em imagens enquanto arrasta */
-    -webkit-user-drag: none;
-    user-select: none;
-}
-
-.carousel-track { 
-    display: flex; 
-    gap: 1.5rem; 
-    transition: transform 0.5s ease-in-out; 
-}
-
-/* * CORREÇÃO PRINCIPAL: 
- * - Trocamos 'width' por 'flex-basis' (ou 'flex' com '0 0').
- * - 'flex-basis' calcula a largura baseada no contêiner visível (.carousel-wrapper),
- * que é o comportamento correto para um carrossel.
- */
-.product-card-link { 
-    text-decoration: none; 
-    color: inherit; 
-    display: block;
-    /* Define que o item não deve crescer nem encolher e sua base é de 85% */
-    flex: 0 0 85%;
-}
-
-.carousel-btn { 
-    position: absolute; 
-    top: 50%; 
-    transform: translateY(-50%); 
-    background-color: rgba(255, 255, 255, 0.7); 
-    border: 1px solid var(--color-brand-brown); 
-    color: var(--color-brand-brown); 
-    border-radius: 50%; 
-    width: 40px; 
-    height: 40px; 
-    font-size: 1.5rem; 
-    cursor: pointer; 
-    z-index: 10; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    transition: background-color 0.3s, color 0.3s; 
-}
-
-.carousel-btn:hover { 
-    background-color: var(--color-brand-brown); 
-    color: white; 
-}
-
-/* CORREÇÃO: Posiciona os botões dentro do padding do container */
-.carousel-btn.prev { 
-    left: 0; 
-}
-
-.carousel-btn.next { 
-    right: 0; 
-}
-
-.carousel-btn:disabled { 
-    cursor: not-allowed; 
-    opacity: 0.4; 
-}
-
-/* --- Seção de Depoimentos --- */
+/* --- Seção de Depoimentos (sem alteração) --- */
 .testimonials-section {
-    padding-top: 4rem;
+    padding-top: 0;
     padding-bottom: 4rem;
 }
+.testimonials-container { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
+.testimonials-title { font-size: 2.25rem; margin-bottom: 4rem; }
+.testimonials-grid { display: grid; grid-template-columns: 1fr; gap: 4rem; }
+.testimonial-card { background-color: var(--color-card-bg); border-radius: 0.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); padding: 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
+.testimonial-card.is-visible { opacity: 1; transform: translateY(0); }
+.testimonial-card:nth-of-type(2).is-visible { transition-delay: 0.2s; }
+.testimonial-card:nth-of-type(3).is-visible { transition-delay: 0.4s; }
+.testimonial-quote-symbol { font-size: 2.25rem; font-family: var(--font-serif); color: var(--color-brand-brown); }
+.testimonial-divider { width: 2.5rem; height: 1px; background-color: var(--color-brand-brown); margin: 0 auto 1.25rem auto; }
+.testimonial-card blockquote { color: var(--color-stone-700); font-style: italic; flex-grow: 1; }
+.testimonial-card cite { margin-top: 1.25rem; font-style: normal; display: block; font-weight: 700; font-size: 1.125rem; color: var(--color-brand-brown); }
 
-.testimonials-container {
-    max-width: 80rem;
-    margin: 0 auto;
-    padding: 0 1rem;
-}
-
-.testimonials-title {
-    font-size: 2.25rem;
-    margin-bottom: 4rem;
-}
-
-.testimonials-grid { 
-    display: grid; 
-    grid-template-columns: 1fr; 
-    gap: 4rem; 
-}
-
-.testimonial-card { 
-    background-color: var(--color-card-bg); 
-    border-radius: 0.5rem; 
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); 
-    padding: 2rem; 
-    display: flex; 
-    flex-direction: column; 
-    align-items: center; 
-    text-align: center; 
-    opacity: 0; 
-    transform: translateY(30px); 
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out; 
-}
-
-.testimonial-card.is-visible { 
-    opacity: 1; 
-    transform: translateY(0); 
-}
-
-.testimonial-card:nth-of-type(2).is-visible { 
-    transition-delay: 0.2s; 
-}
-
-.testimonial-card:nth-of-type(3).is-visible { 
-    transition-delay: 0.4s; 
-}
-
-.testimonial-quote-symbol { 
-    font-size: 2.25rem; 
-    font-family: var(--font-serif); 
-    color: var(--color-brand-brown); 
-}
-
-.testimonial-divider { 
-    width: 2.5rem; 
-    height: 1px; 
-    background-color: var(--color-brand-brown); 
-    margin: 0 auto 1.25rem auto; 
-}
-
-.testimonial-card blockquote { 
-    color: var(--color-stone-700); 
-    font-style: italic; 
-    flex-grow: 1; 
-}
-
-.testimonial-card cite { 
-    margin-top: 1.25rem; 
-    font-style: normal; 
-    display: block; 
-    font-weight: 700; 
-    font-size: 1.125rem; 
-    color: var(--color-brand-brown); 
-}
-
-/* --- MEDIA QUERIES PARA RESPONSIVIDADE --- */
-
-/* Telas pequenas (2 itens visíveis no carrossel) */
-@media (min-width: 500px) { 
-    .product-card-link { 
-        /* Fórmula: 100% / 2 itens - (1.5rem de gap / 2 itens) */
-        flex-basis: calc(100% / 2 - (1.5rem / 2)); 
-    } 
-}
-
-/* Tablets (3 itens visíveis no carrossel e layout de depoimentos em grid) */
-@media (min-width: 768px) { 
-    .main-container { 
-        padding-top: 3rem; 
-        padding-bottom: 3rem; 
-        margin-bottom: 6rem; 
-    } 
-    .section-title { 
-        font-size: 2.25rem; 
-        text-align: left; 
-    } 
-    .testimonials-title { 
-        font-size: 2.5rem; 
-    } 
-    .testimonials-grid { 
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 3rem; 
-    }
-    
-    .product-card-link { 
-        /* Fórmula: 100% / 3 itens - (1.5rem de gap * 2 espaços / 3 itens) */
-        flex-basis: calc(100% / 3 - (1.5rem * 2 / 3)); 
-    } 
-}
-
-/* Desktops pequenos (4 itens visíveis no carrossel) */
-@media (min-width: 1024px) { 
-    .product-card-link { 
-        /* Fórmula: 100% / 4 itens - (1.5rem de gap * 3 espaços / 4 itens) */
-        flex-basis: calc(100% / 4 - (1.5rem * 3 / 4)); 
-    } 
-}
-
-/* Desktops grandes (5 itens visíveis no carrossel) */
-@media (min-width: 1280px) { 
-    .product-card-link { 
-        /* Fórmula: 100% / 5 itens - (1.5rem de gap * 4 espaços / 5 itens) */
-        flex-basis: calc(100% / 5 - (1.5rem * 4 / 5)); 
-    } 
-}
+/* --- MEDIA QUERIES (sem alteração) --- */
+@media (min-width: 500px) { .product-card-link { flex-basis: calc(100% / 2 - (1.5rem / 2)); } }
+@media (min-width: 768px) { .main-container { padding-top: 0; padding-bottom: 3rem; margin-bottom: 0; } .section-title { font-size: 2.25rem; text-align: left; padding-top: 4rem; } .testimonials-title { font-size: 2.5rem; } .testimonials-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; } .product-card-link { flex-basis: calc(100% / 3 - (1.5rem * 2 / 3)); } }
+@media (min-width: 1024px) { .product-card-link { flex-basis: calc(100% / 4 - (1.5rem * 3 / 4)); } }
+@media (min-width: 1280px) { .product-card-link { flex-basis: calc(100% / 5 - (1.5rem * 4 / 5)); } }

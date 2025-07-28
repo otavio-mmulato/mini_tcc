@@ -9,75 +9,30 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/home.css' %}">
+    <link rel="stylesheet" href="{% static 'css/hero_swiper.css' %}">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
     <link rel="icon" type="image/png" href="{% static 'src/diana.png' %}" sizes="180x180"/>
 </head>
 <body>
 
-    <header>
-        <nav class="main-nav">
-            <a href="{% url 'home' %}"><img src="{% static 'src/logo.png' %}" alt="Logo Jardim da Diana" class="logo-header-height"></a>
-            
-            <div class="nav-links desktop-only">
-                <a href="{% url 'presentes' %}" class="nav-link">Presente</a>
-                <a href="{% url 'buques' %}" class="nav-link">Buquês</a>
-                <a href="{% url 'jardinagem' %}" class="nav-link">Itens de Jardinagem</a> {# Você precisará criar a URL para esta página #}
-                <a href="{% url 'suculentas' %}" class="nav-link">Suculentas</a> {# E para esta #}
-                <a href="{% url 'sobre-nos' %}" class="nav-link">Sobre Nós</a>
-            </div>
+    {% include 'produtos/header.html' %}
 
-            <form action="{% url 'search' %}" method="get" class="nav-search-bar">
-                <input type="text" name="q" placeholder="Buscar item..." class="nav-search-input" value="{{ query|default:'' }}">
-                <button type="submit" class="nav-search-icon">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-            </form>
-            
-            <div class="nav-user-actions desktop-only">
-                <a href="{% url 'perfil' %}" class="nav-user-action">
-                    <i class="fa-solid fa-user"></i>
-                    <span>PERFIL</span>
-                </a>
-                    <a href="{% url 'cart:cart_detail' %}" class="nav-user-action">
-                    <i class="fa-solid fa-shopping-bag"></i>
-                    <span>SACOLA ({% if cart|length > 0 %}{{ cart|length }}{% else %}0{% endif %})</span>
-                </a>
-            </div>
-
-            <button id="hamburger-btn" class="mobile-only">
-                <i class="fa-solid fa-bars"></i>
-            </button>
-        </nav>
-    </header>
-
-    <div id="mobile-menu">
-        <div class="mobile-menu-header">
-            <img src="{% static 'src/logo.png' %}" alt="Logo" class="mobile-menu-logo">
-            <button id="close-menu-btn">
-                <i class="fa-solid fa-xmark"></i>
-            </button>
+    <div class="swiper hero-swiper">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide" style="background-image: url({% static 'src/banner_inicial.png' %});"></div>
+            <div class="swiper-slide" style="background-image: url({% static 'src/banner2.png' %});"></div>
+            <div class="swiper-slide" style="background-image: url({% static 'src/banner3.png' %});"></div>
+            <div class="swiper-slide" style="background-image: url({% static 'src/banner_final.png' %});"></div>
         </div>
-        <div class="mobile-menu-links">
-            <a href="{% url 'presentes' %}" class="nav-link">Presente</a>
-            <a href="{% url 'buques' %}" class="nav-link">Buquês</a>
-            <a href="#" class="nav-link">Itens de Jardinagem</a>
-            <a href="#" class="nav-link">Suculentas</a>
-            <a href="{% url 'sobre-nos' %}" class="nav-link">Sobre Nós</a>
-        </div>
-        <div class="mobile-user-actions">
-            <a href="#" class="nav-user-action">
-                <i class="fa-solid fa-user"></i>
-                <span>PERFIL</span>
-            </a>
-            <a href="#" class="nav-user-action">
-                <i class="fa-solid fa-shopping-bag"></i>
-                <span>SACOLA</span>
-            </a>
-        </div>
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-pagination"></div>
     </div>
 
     <main class="main-container">
@@ -87,21 +42,20 @@
             <button id="prev-btn" class="carousel-btn prev">&#10094;</button>
             <div class="carousel-wrapper">
                 <div id="products-carousel" class="carousel-track">
-                    
                     {% for produto in produtos %}
                         <a href="{% url 'produto-detalhe' pk=produto.pk %}" class="product-card-link">
                             <div class="product-card">
-                                {% if produto.imagem %}
-                                    <img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">
-                                {% else %}
-                                    <img src="{% static 'src/placeholder.png' %}" alt="Imagem não disponível">
-                                {% endif %}
-                                <p>{{ produto.nome }}</p>
-                                <span class="price">R$ {{ produto.preco|floatformat:2 }}</span>
+                                <div class="product-image-wrapper">
+                                    {% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% endif %}
+                                    <div class="product-image-overlay"><span class="overlay-button">Ver Detalhes</span></div>
+                                </div>
+                                <div class="product-card-info">
+                                    <p>{{ produto.nome }}</p>
+                                    <span class="price">R$ {{ produto.preco|floatformat:2 }}</span>
+                                </div>
                             </div>
                         </a>
                     {% endfor %}
-
                 </div>
             </div>
             <button id="next-btn" class="carousel-btn next">&#10095;</button>
@@ -145,12 +99,13 @@
             </div>
         </div>
     </section>
-    
     {% include 'produtos/footer.html' %}
 
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/scroll-animation.js' %}"></script>
     <script src="{% static 'js/carousel.js' %}"></script>
+    <script src="{% static 'js/swiper_init.js' %}"></script>
 
 </body>
 </html>

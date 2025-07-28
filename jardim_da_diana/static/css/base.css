@@ -224,7 +224,7 @@ header {
 }
 
 .footer-logo-container { display: flex; justify-content: flex-start; }
-.logo-footer-height { height: 9rem !important; }
+.logo-footer-height { height: 9rem !important; margin-left: 100px; }
 .footer-center { text-align: center; }
 .footer-social-icons { display: flex; justify-content: center; gap: 1rem; font-size: 1.5rem; margin-bottom: 0.75rem; }
 .footer-social-icons a { color: var(--color-header-text); text-decoration: none; transition: color 200ms ease-in-out; }
