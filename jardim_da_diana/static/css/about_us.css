@@ -1,18 +1,23 @@
-/* ==============================================
-CORREÇÃO PARA EVITAR SOBREPOSIÇÃO DO HEADER
-==============================================
-*/
+/* --- Definição de Variáveis de Fonte e Cor --- */
+:root {
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
+
+    /* Suas outras variáveis de cor */
+    --color-brand-brown: #5d4037;
+    --color-brand-yellow: #f7b733; /* Exemplo de amarelo para o divisor */
+    --color-header-text: #333333;
+}
+
+/* --- Container Principal --- */
 .main-container {
-    /* Zeramos o padding e margin do container, pois o controle do
-       espaçamento será feito diretamente no card abaixo.
-    */
+    font-family: var(--font-sans); /* <<< APLICA A FONTE LATO A TODO O CONTEÚDO */
     padding-top: 0;
     margin-top: 0; 
 }
 
 
 /* --- Estilos específicos da página Sobre Nós --- */
-
 .about-us-card {
     background-color: #fffcf5;
     border-radius: 12px;
@@ -20,13 +25,6 @@ CORREÇÃO PARA EVITAR SOBREPOSIÇÃO DO HEADER
     padding: 3rem 4rem;
     max-width: 800px;
     border: 1px solid #eee;
-
-    /* =================================================================
-       SOLUÇÃO FINAL PARA O ESPAÇAMENTO
-       - O primeiro valor (40px) define a distância para o header.
-       - Altere este valor para mais ou menos espaço conforme desejar.
-       - O !important garante que esta regra seja sempre aplicada.
-    ================================================================= */
     margin: 40px auto 2rem auto !important; 
 }
 
@@ -38,7 +36,7 @@ CORREÇÃO PARA EVITAR SOBREPOSIÇÃO DO HEADER
 
 .about-us-title {
     color: var(--color-brand-brown);
-    font-family: var(--font-serif);
+    font-family: var(--font-serif); /* CORRETO: Já estava usando a fonte serifada */
     font-size: 2.8rem;
     font-weight: 600;
     margin: 0;
@@ -122,7 +120,7 @@ CORREÇÃO PARA EVITAR SOBREPOSIÇÃO DO HEADER
 @media (max-width: 768px) {
     .about-us-card {
         padding: 2rem;
-        margin: 1rem !important; /* Margem menor para telas pequenas */
+        margin: 1rem !important;
     }
 
     .about-us-title {

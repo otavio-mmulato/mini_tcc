@@ -1,4 +1,8 @@
 {% load static %}
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 <header>
     <nav class="main-nav">
         <a href="{% url 'home' %}"><img src="{% static 'src/logo.png' %}" alt="Logo Jardim da Diana" class="logo-header-height"></a>
@@ -45,8 +49,8 @@
     <div class="mobile-menu-links">
         <a href="{% url 'presentes' %}" class="nav-link">Presente</a>
         <a href="{% url 'buques' %}" class="nav-link">Buquês</a>
-        <a href="#" class="nav-link">Itens de Jardinagem</a>
-        <a href="#" class="nav-link">Suculentas</a>
+        <a href="{% url 'jardinagem' %}" class="nav-link">Itens de Jardinagem</a>
+        <a href="{% url 'suculentas' %}" class="nav-link">Suculentas</a>
         <a href="{% url 'sobre-nos' %}" class="nav-link">Sobre Nós</a>
     </div>
     <div class="mobile-user-actions">

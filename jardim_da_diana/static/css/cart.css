@@ -1,37 +1,187 @@
-/* --- ALTERAÇÃO: Reduz o espaço no topo da página --- */
-.main-container {
-    padding-top: 0rem; /* Ajusta o espaço entre o menu e o título "Minha Sacola" */
+/* --- Definição de Variáveis --- */
+:root {
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Lato', sans-serif;
+
+    /* Defina suas cores aqui para consistência */
+    --color-brand-brown: #5d4037; /* Exemplo de marrom */
+    --color-brand-green: #2e7d32; /* Exemplo de verde */
+    --color-header-text: #333333;
+    --color-stone-700: #44403c;
 }
 
-.cart-title { text-align: center; color: var(--color-brand-brown); font-size: 2.25rem; margin-bottom: 2rem; }
-.cart-layout { display: grid; grid-template-columns: 2fr 1fr; gap: 2rem; align-items: flex-start; }
-.cart-items-card, .cart-summary-card { background-color: #fff; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+/* --- Estilos Globais --- */
+body {
+    /* A fonte padrão do seu site será mantida no header e em outras áreas. */
+    background-color: var(--color-brand-bg);
+}
+
+/* --- Container Principal --- */
+.main-container {
+    font-family: var(--font-sans); /* << A FONTE LATO É APLICADA AQUI */
+    padding-top: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+.cart-title {
+    font-family: var(--font-serif); /* Fonte Serif para o título principal */
+    text-align: center;
+    color: var(--color-brand-brown);
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+}
+
+.cart-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+    align-items: flex-start;
+}
+
+.cart-items-card, .cart-summary-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
 
 /* --- Tabela de Itens --- */
-.cart-table { width: 100%; border-collapse: collapse; }
-.cart-table th, .cart-table td { padding: 1.5rem 1rem; border-bottom: 1px solid #e5e7eb; vertical-align: middle; text-align: left; }
-.cart-table tr:last-child td { border-bottom: none; }
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-.produto-cell { display: flex; align-items: center; gap: 1rem; }
-.cart-image { width: 80px; height: 80px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-.produto-nome { color: var(--color-header-text); text-decoration: none; font-weight: 600; font-size: 1rem; }
-.produto-nome:hover { color: var(--color-brand-green); }
+.cart-table th {
+    text-align: left;
+    color: #6b7280;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.05em;
+}
+
+.cart-table th, .cart-table td {
+    padding: 1.5rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.cart-table tr:last-child td {
+    border-bottom: none;
+}
+
+.produto-cell {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.cart-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    flex-shrink: 0;
+}
+
+.produto-nome {
+    color: var(--color-header-text);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: color 0.2s;
+}
+
+.produto-nome:hover {
+    color: var(--color-brand-green);
+}
 
 .td-quantidade { text-align: center; }
 .td-remover { text-align: center; }
-.remove-link { font-size: 1.8rem; font-weight: bold; color: #ef4444; text-decoration: none; }
 .num { text-align: right; }
 
-/* --- Resumo do Pedido --- */
-.summary-title { text-align: center; color: var(--color-brand-brown); font-size: 1.5rem; margin-top: 0; margin-bottom: 2rem; }
-.summary-item, .summary-total { display: flex; justify-content: space-between; margin-bottom: 1rem; font-size: 1rem; }
-.frete-gratis { color: var(--color-brand-green); font-weight: 600; }
-.summary-divider { border: none; border-top: 1px solid #e5e7eb; margin: 1.5rem 0; }
-.summary-total { font-size: 1.25rem; font-weight: bold; }
-.checkout-btn { width: 100%; margin-top: 1.5rem; }
-.cart-empty-message { padding: 2rem; text-align: center; font-size: 1.125rem; color: var(--color-stone-700); }
+.remove-link {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #ef4444;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.remove-link:hover {
+    color: #b91c1c;
+}
 
-/* --- NOVA RESPONSIVIDADE --- */
+
+/* --- Resumo do Pedido --- */
+.summary-title {
+    font-family: var(--font-serif); /* Fonte Serif para o título do resumo */
+    text-align: center;
+    color: var(--color-brand-brown);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 2rem;
+}
+
+.summary-item, .summary-total {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.frete-gratis {
+    color: var(--color-brand-green);
+    font-weight: 600;
+}
+
+.summary-divider {
+    border: none;
+    border-top: 1px solid #e5e7eb;
+    margin: 1.5rem 0;
+}
+
+.summary-total {
+    font-size: 1.25rem;
+    font-weight: bold;
+}
+
+.checkout-btn {
+    width: 100%;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-brand-green);
+    color: white;
+    transition: background-color 0.2s;
+}
+
+.checkout-btn:hover:not(:disabled) {
+    background-color: #1e4d22; /* Verde mais escuro */
+}
+
+.checkout-btn:disabled {
+    background-color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.cart-empty-message {
+    padding: 2rem;
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--color-stone-700);
+}
+
+
+/* --- Responsividade --- */
 @media (max-width: 1024px) {
     .cart-layout {
         grid-template-columns: 1fr; /* Layout de coluna única */
@@ -42,18 +192,15 @@
     .cart-items-card, .cart-summary-card {
         padding: 1rem;
     }
+    .cart-title { font-size: 2rem; }
     .cart-table th, .cart-table td {
-        padding: 1rem 0.5rem; /* Diminui o espaçamento */
+        padding: 1rem 0.5rem;
     }
-    /* Oculta colunas menos importantes em telas pequenas */
-    .cart-table .th-preco, .cart-table .td-preco {
+    
+    /* Oculta colunas menos importantes e ajusta layout da tabela */
+    .cart-table .th-preco, .cart-table .td-preco, .cart-table .th-subtotal {
         display: none;
     }
-    .cart-image {
-        width: 60px;
-        height: 60px;
-    }
-    .produto-nome {
-        font-size: 0.9rem;
-    }
+    .cart-image { width: 60px; height: 60px; }
+    .produto-nome { font-size: 0.9rem; }
 }

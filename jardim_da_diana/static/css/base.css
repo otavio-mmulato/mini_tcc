@@ -2,7 +2,11 @@
 
 /* --- Variáveis Globais e Estilos Base --- */
 :root {
-    --font-serif: 'Times New Roman', Times, serif;
+    /* --- FONTES ATUALIZADAS --- */
+    --font-serif: 'Playfair Display', serif; /* Fonte para títulos de conteúdo */
+    --font-sans: 'Lato', sans-serif;         /* Fonte para header, footer e textos */
+
+    /* --- Cores --- */
     --color-brand-yellow: #F2B11D;
     --color-brand-brown: #A07855;
     --color-brand-green: #2C641E;
@@ -12,29 +16,32 @@
 }
 
 body {
-    font-family: var(--font-serif);
+    /* --- ALTERAÇÃO PRINCIPAL: Lato se torna a fonte padrão --- */
+    font-family: var(--font-sans); 
     background-color: var(--color-brand-bg);
     color: var(--color-header-text);
     margin: 0;
-}
-body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Garante que o footer fique no final da página */
+    min-height: 100vh;
 }
 
-/* --- ALTERAÇÃO 1: Deixa o cabeçalho fixo no topo --- */
+/* --- Layout --- */
 header {
-    position: sticky; /* Faz o elemento "grudar" na tela */
-    top: 0;           /* Define que ele deve grudar no topo (posição 0) */
-    z-index: 999;     /* Garante que o header fique sobre os outros conteúdos */
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
-/* --- ALTERAÇÃO 2: Adiciona espaço para o cabeçalho fixo --- */
 .main-container{
     flex-grow: 1;
-    padding-top: 5.5rem; /* Adicionado para evitar que o conteúdo comece embaixo do header */
+    /* O padding-top aqui é uma forma de garantir espaço para o header fixo.
+       Nos CSS das páginas específicas (carrinho, sobre), você pode ajustar 
+       o espaçamento do primeiro elemento se necessário.
+    */
+    padding-top: 1rem; 
 }
+
 
 /* --- Componentes do Header --- */
 .main-nav {
@@ -42,9 +49,9 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0.5rem 1.5rem; /* Padding ajustado para telas menores */
+    padding: 0.5rem 1.5rem;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-    gap: 1rem; /* Espaçamento entre os itens */
+    gap: 1rem;
 }
 
 .nav-links {
@@ -61,7 +68,7 @@ header {
     color: var(--color-header-text);
     text-decoration: none;
     transition: color 200ms ease-in-out;
-    white-space: nowrap; /* Evita que os links quebrem linha */
+    white-space: nowrap;
 }
 .nav-link:hover {
     color: var(--color-brand-green);
@@ -69,19 +76,19 @@ header {
 
 .logo-header-height {
     height: 4rem !important;
-    flex-shrink: 0; /* Impede que a logo encolha */
+    flex-shrink: 0;
 }
 
 .nav-search-bar {
     position: relative;
     display: flex;
     align-items: center;
-    flex-grow: 1; /* Permite que a barra cresça */
-    max-width: 500px; /* Limita a largura máxima em telas grandes */
+    flex-grow: 1;
+    max-width: 500px;
 }
 
 .nav-search-input {
-    width: 100%; /* Ocupa todo o espaço do container */
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.8);
     border-radius: 9999px;
     padding: 0.375rem 2.5rem 0.375rem 1rem;
@@ -89,6 +96,7 @@ header {
     color: var(--color-header-text);
     border: none;
     box-sizing: border-box;
+    font-family: var(--font-sans); /* Garante a fonte Lato aqui também */
 }
 .nav-search-input::placeholder {
     color: var(--color-header-text);
@@ -131,80 +139,27 @@ header {
 }
 
 /* --- Menu Hambúrguer e Mobile --- */
-.mobile-only {
-    display: none; /* Oculto por padrão */
-    flex-shrink: 0; /* Impede que o botão encolha */
-}
-
-#hamburger-btn {
-    font-size: 1.75rem;
-    color: var(--color-header-text);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
+.mobile-only { display: none; flex-shrink: 0; }
+#hamburger-btn { font-size: 1.75rem; color: var(--color-header-text); background: none; border: none; cursor: pointer; }
 
 #mobile-menu {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 300px; /* Largura do menu lateral */
-    height: 100%;
-    background-color: var(--color-brand-yellow); /* <<<< COR DE FUNDO ALTERADA */
-    z-index: 1000;
-    padding: 1.5rem;
+    position: fixed; top: 0; right: 0; width: 300px; height: 100%;
+    background-color: var(--color-brand-yellow);
+    z-index: 1000; padding: 1.5rem;
     box-shadow: -10px 0px 30px -15px rgba(0,0,0,0.3);
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
-    transform: translateX(100%); /* Começa fora da tela */
+    display: flex; flex-direction: column; gap: 2rem;
+    transform: translateX(100%);
     transition: transform 0.3s ease-in-out;
 }
+#mobile-menu.open { transform: translateX(0); }
 
-#mobile-menu.open {
-    transform: translateX(0); /* Entra na tela */
-}
-
-.mobile-menu-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.mobile-menu-logo {
-    height: 3rem;
-}
-
-#close-menu-btn {
-    font-size: 2rem;
-    color: var(--color-header-text);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.mobile-menu-links {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-}
-
-.mobile-menu-links .nav-link {
-    font-size: 1.125rem;
-    padding: 0.5rem;
-    text-align: center;
-    border-radius: 8px;
-}
-.mobile-menu-links .nav-link:hover {
-    background-color: var(--color-brand-bg); /* <<<< COR DO HOVER ALTERADA */
-}
-
-.mobile-user-actions {
-    display: flex;
-    justify-content: center;
-    gap: 2.5rem;
-    margin-top: 8rem; /* Empurra para o fundo */
-}
+.mobile-menu-header { display: flex; justify-content: space-between; align-items: center; }
+.mobile-menu-logo { height: 3rem; }
+#close-menu-btn { font-size: 2rem; color: var(--color-header-text); background: none; border: none; cursor: pointer; }
+.mobile-menu-links { display: flex; flex-direction: column; gap: 1rem; }
+.mobile-menu-links .nav-link { font-size: 1.125rem; padding: 0.5rem; text-align: center; border-radius: 8px; }
+.mobile-menu-links .nav-link:hover { background-color: var(--color-brand-bg); }
+.mobile-user-actions { display: flex; justify-content: center; gap: 2.5rem; margin-top: auto; padding-bottom: 2rem; }
 
 /* --- Componentes do Footer --- */
 .footer-new {
@@ -213,18 +168,9 @@ header {
     color: var(--color-header-text);
     padding: 2rem 2rem;
 }
-
-.footer-grid {
-    max-width: 80rem;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    gap: 2rem;
-}
-
+.footer-grid { max-width: 80rem; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; align-items: center; gap: 2rem; }
 .footer-logo-container { display: flex; justify-content: flex-start; }
-.logo-footer-height { height: 9rem !important; margin-left: 100px; }
+.logo-footer-height { height: 9rem !important; }
 .footer-center { text-align: center; }
 .footer-social-icons { display: flex; justify-content: center; gap: 1rem; font-size: 1.5rem; margin-bottom: 0.75rem; }
 .footer-social-icons a { color: var(--color-header-text); text-decoration: none; transition: color 200ms ease-in-out; }
@@ -236,115 +182,44 @@ header {
 .footer-payment-title { font-weight: 700; margin-bottom: 0.75rem; text-align: center; }
 .payment-icons-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.5rem 0.25rem; width: 100%; max-width: 200px; }
 .payment-icon-wrapper { height: 2rem; display: flex; align-items: center; justify-content: center; }
-.payment-icon { object-fit: contain; }
-.payment-icon.mastercard { height: 1.5rem; }
-.payment-icon.visa { height: 1.25rem; }
-.payment-icon.amex { height: 1.5rem; }
-.payment-icon.elo { height: 1.25rem; }
-.payment-icon.hipercard { height: 2rem; }
-.payment-icon.paypal { height: 1.5rem; }
+.payment-icon { object-fit: contain; max-height: 100%; max-width: 100%;}
 
-.product-card-link {
-    text-decoration: none; /* Remove o sublinhado */
-    color: inherit; /* Faz o texto do link herdar a cor normal */
+/* --- Links e Botões Globais --- */
+.product-card-link { text-decoration: none; color: inherit; }
+.btn {
+    width: 100%; padding: 1rem 1.5rem; font-size: 1.1rem; font-weight: 700;
+    border-radius: 8px; border: none; cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    display: flex; align-items: center; justify-content: center; gap: 0.75rem;
 }
+.btn:hover { transform: translateY(-2px); box-shadow: 0 4px 20px rgba(44, 100, 30, 0.2); }
+.btn-primary { background-color: var(--color-brand-green, #2C641E); color: white; }
+
+/* --- Componente: Seletor de Quantidade --- */
+.quantity-selector { display: flex; align-items: center; border-radius: 8px; overflow: hidden; }
+.quantity-btn {
+    background-color: #f9fafb; border: 1px solid #d1d5db; border-right: none; cursor: pointer;
+    font-size: 1.5rem; font-weight: 300; width: 40px; height: 40px; color: var(--color-stone-700);
+}
+.quantity-btn.plus { border-right: 1px solid #d1d5db; border-left: none; }
+.quantity-input {
+    width: 50px; height: 40px; text-align: center;
+    border: 1px solid #d1d5db; border-left: none; border-right: none;
+    font-size: 1rem; font-weight: 600; -moz-appearance: textfield;
+}
+.quantity-input::-webkit-outer-spin-button, .quantity-input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.detail-form { display: flex; align-items: center; gap: 1rem; }
+
 
 /* --- Responsividade (Base, Header e Footer) --- */
 @media (max-width: 1024px) {
-    /* Esconde os links e ações de usuário do header no mobile */
-    .desktop-only {
-        display: none;
-    }
-    /* Mostra o botão hambúrguer no mobile */
-    .mobile-only {
-        display: block;
-    }
-
-    /* Ajustes no Footer */
-    .footer-grid {
-        grid-template-columns: 1fr;
-        gap: 1.5rem;
-        text-align: center;
-    }
-    .footer-logo-container, .footer-payment {
-        justify-content: center;
-    }
+    .desktop-only { display: none; }
+    .mobile-only { display: block; }
+    .footer-grid { grid-template-columns: 1fr; gap: 1.5rem; text-align: center; }
+    .footer-logo-container, .footer-payment { justify-content: center; }
 }
 
-/* Regra para telas ainda menores, se necessário */
 @media (max-width: 480px) {
-    .main-nav {
-        padding: 0.5rem 1rem;
-    }
-    .nav-search-input::placeholder {
-        font-size: 0.75rem; /* Diminui o texto do placeholder */
-    }
-}
-.btn {
-    width: 100%;
-    padding: 1rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 700;
-    border-radius: 8px;
-    border: none;
-    cursor: pointer;
-    transition: all 0.2s ease-in-out;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.75rem;
-}
-
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(44, 100, 30, 0.2);
-}
-
-.btn-primary {
-    background-color: var(--color-brand-green, #2C641E);
-    color: white;
-}
-/* --- Componente: Seletor de Quantidade --- */
-.quantity-selector {
-    display: flex;
-    align-items: center;
-    border-radius: 8px;
-    overflow: hidden; /* Garante que os botões fiquem dentro das bordas arredondadas */
-}
-
-.quantity-btn {
-    background-color: #f9fafb;
-    border: none;
-    cursor: pointer;
-    font-size: 1.5rem;
-    font-weight: 300;
-    width: 40px;
-    height: 40px;
-    color: var(--color-stone-700);
-}
-.quantity-btn:hover {
-    background-color: #f3f4f6;
-}
-
-.quantity-input {
-    width: 50px;
-    height: 40px;
-    text-align: center;
-    border: none;
-    border-left: 1px solid #d1d5db;
-    border-right: 1px solid #d1d5db;
-    font-size: 1rem;
-    font-weight: 600;
-    -moz-appearance: textfield; /* Remove setas padrão do Firefox */
-}
-.quantity-input::-webkit-outer-spin-button,
-.quantity-input::-webkit-inner-spin-button {
-  -webkit-appearance: none; /* Remove setas padrão do Chrome/Safari */
-  margin: 0;
-}
-
-.detail-form {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
+    .main-nav { padding: 0.5rem 1rem; }
+    .nav-search-input::placeholder { font-size: 0.75rem; }
 }

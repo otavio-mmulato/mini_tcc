@@ -4,6 +4,10 @@
 {% block title %}Minha Sacola - Jardim da Diana{% endblock %}
 
 {% block extra_css %}
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    
     <link rel="stylesheet" href="{% static 'css/cart.css' %}">
 {% endblock %}
 
@@ -41,7 +45,7 @@
                                         <button type="button" class="quantity-btn plus" data-product-id="{{ item.product.id }}">+</button>
                                     </div>
                                 </td>
-                                <td class="num" data-label="Preço Unit.">R$ {{ item.price|floatformat:2 }}</td>
+                                <td class="num td-preco" data-label="Preço Unit.">R$ {{ item.price|floatformat:2 }}</td>
                                 <td class="num item-subtotal" data-label="Subtotal">R$ {{ item.total_price|floatformat:2 }}</td>
                                 <td class="td-remover"><a href="{% url 'cart:cart_remove' item.product.id %}" class="remove-link" title="Remover item">&times;</a></td>
                             </tr>
@@ -58,11 +62,12 @@
             <div class="summary-item"><span>Frete:</span><span class="frete-gratis">Frete Grátis</span></div>
             <hr class="summary-divider">
             <div class="summary-total"><span>Total Geral:</span><span id="summary-total">R$ {{ cart.get_total_price|floatformat:2 }}</span></div>
-            <button class="btn btn-primary checkout-btn" {% if not cart|length > 0 %}disabled{% endif %}>Finalizar Pedido</button>
+            <button class="btn btn-primary checkout-btn" onclick="finalizar()" {% if not cart|length > 0 %}disabled{% endif %}>Finalizar Pedido</button>
         </div>
     </div>
 </main>
 {% endblock %}
 
 {% block extra_js %}
-    {% endblock %}
+    <script src="{% static 'js/cart.js' %}"></script>
+{% endblock %}
