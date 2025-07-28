@@ -10,20 +10,16 @@
     --font-sans: 'Lato', sans-serif;
 }
 
-/* --- Container Principal e Seção de Depoimentos --- */
+/* --- Container Principal --- */
 .main-container,
 .testimonials-section {
     font-family: var(--font-sans);
 }
 
-/* CORREÇÃO AQUI: 
-  Removemos o padding do topo do container principal APENAS na home page,
-  para que o carrossel de banners fique colado no header.
-*/
 .main-container {
     max-width: 80rem;
     margin: 0 auto;
-    padding: 0 1rem 3rem 1rem; /* Padding do topo zerado */
+    padding: 0 1rem 3rem 1rem;
 }
 
 .section-title, 
@@ -37,11 +33,10 @@
 .section-title {
     font-size: 1.875rem;
     margin-bottom: 2rem;
-    /* Adicionamos um padding no topo para compensar a remoção do padding do container */
     padding-top: 3rem; 
 }
 
-/* --- Estilos base do Product Card (sem alteração) --- */
+/* --- Estilos base do Product Card --- */
 .product-card {
     background-color: var(--color-card-bg);
     border-radius: 0.75rem;
@@ -52,26 +47,133 @@
     width: 100%;
     height: 100%;
     box-sizing: border-box;
+    transition: box-shadow 0.3s ease;
 }
-.product-card:hover { box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); }
-.product-card img { width: 100%; height: 12rem; object-fit: contain; border-radius: 0.5rem; }
-.product-card p { font-size: 0.875rem; color: var(--color-gray-800); margin-top: 0.75rem; flex-grow: 1; }
-.product-card .price { font-weight: 700; font-size: 1rem; color: #80786C; margin-top: 0.25rem; }
+
+.product-card:hover { 
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1); 
+}
+
+.product-card-info p { 
+    font-size: 0.875rem; 
+    color: var(--color-gray-800); 
+    margin-top: 0.75rem; 
+    flex-grow: 1;
+}
+.product-card-info .price { 
+    font-weight: 700; 
+    font-size: 1rem; 
+    color: var(--color-brand-brown); 
+    margin-top: 0.25rem; 
+}
+
+/* --- EFEITO HOVER NA IMAGEM --- */
+.product-image-wrapper {
+    position: relative;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.product-image-wrapper img { 
+    width: 100%; 
+    height: 12rem; 
+    object-fit: contain; 
+    display: block;
+}
+
+.product-image-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.product-image-wrapper:hover .product-image-overlay {
+    opacity: 1;
+}
+
+.overlay-button {
+    background-color: white;
+    color: var(--color-brand-brown);
+    padding: 0.5rem 1rem;
+    border-radius: 2rem;
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-align: center;
+}
 
 
-/* --- ESTILOS DO CARROSSEL DE PRODUTOS (sem alteração) --- */
-.carousel-container { position: relative; width: 100%; box-sizing: border-box; padding: 0 40px; }
-.carousel-wrapper { width: 100%; overflow: hidden; -webkit-user-drag: none; user-select: none; }
-.carousel-track { display: flex; gap: 1.5rem; transition: transform 0.5s ease-in-out; }
-.product-card-link { text-decoration: none; color: inherit; display: block; flex: 0 0 85%; }
-.carousel-btn { position: absolute; top: 50%; transform: translateY(-50%); background-color: rgba(255, 255, 255, 0.7); border: 1px solid var(--color-brand-brown); color: var(--color-brand-brown); border-radius: 50%; width: 40px; height: 40px; font-size: 1.5rem; cursor: pointer; z-index: 10; display: flex; align-items: center; justify-content: center; transition: background-color 0.3s, color 0.3s; }
-.carousel-btn:hover { background-color: var(--color-brand-brown); color: white; }
-.carousel-btn.prev { left: 0; }
-.carousel-btn.next { right: 0; }
-.carousel-btn:disabled { cursor: not-allowed; opacity: 0.4; }
+/* --- ESTILOS DO CARROSSEL DE PRODUTOS (ATUALIZADO) --- */
+
+.product-carousel-container {
+    position: relative;
+    max-width: 80rem;
+    margin: 0 auto;
+    padding: 0 3.5rem; /* Espaço nas laterais PARA AS SETAS */
+    box-sizing: border-box;
+}
+
+.product-swiper {
+    width: 100%;
+    margin-bottom: 3rem;
+}
+
+.swiper-slide.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    height: auto;
+}
+
+/* Garante que a bolinha de paginação ativa tenha a cor correta */
+.product-swiper .swiper-pagination-bullet-active {
+    background: var(--color-brand-brown);
+}
+
+/* --- Estilo Customizado para os Botões do Carrossel --- */
+.product-carousel-container .swiper-button-prev,
+.product-carousel-container .swiper-button-next {
+    width: 44px;
+    height: 44px;
+    background-color: transparent;
+    border: 1px solid var(--color-brand-brown);
+    border-radius: 50%;
+    transition: background-color 0.3s, opacity 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: -2rem; /* Ajuste fino vertical para alinhar com o meio das imagens */
+}
+
+.product-carousel-container .swiper-button-prev {
+    left: 0;
+}
+
+.product-carousel-container .swiper-button-next {
+    right: 0;
+}
+
+.product-carousel-container .swiper-button-prev::after,
+.product-carousel-container .swiper-button-next::after {
+    color: var(--color-brand-brown);
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.product-carousel-container .swiper-button-prev:hover,
+.product-carousel-container .swiper-button-next:hover {
+    background-color: rgba(128, 120, 108, 0.1);
+}
 
 
-/* --- Seção de Depoimentos (sem alteração) --- */
+/* --- Seção de Depoimentos (Inalterado) --- */
 .testimonials-section {
     padding-top: 0;
     padding-bottom: 4rem;
@@ -88,8 +190,28 @@
 .testimonial-card blockquote { color: var(--color-stone-700); font-style: italic; flex-grow: 1; }
 .testimonial-card cite { margin-top: 1.25rem; font-style: normal; display: block; font-weight: 700; font-size: 1.125rem; color: var(--color-brand-brown); }
 
-/* --- MEDIA QUERIES (sem alteração) --- */
-@media (min-width: 500px) { .product-card-link { flex-basis: calc(100% / 2 - (1.5rem / 2)); } }
-@media (min-width: 768px) { .main-container { padding-top: 0; padding-bottom: 3rem; margin-bottom: 0; } .section-title { font-size: 2.25rem; text-align: left; padding-top: 4rem; } .testimonials-title { font-size: 2.5rem; } .testimonials-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; } .product-card-link { flex-basis: calc(100% / 3 - (1.5rem * 2 / 3)); } }
-@media (min-width: 1024px) { .product-card-link { flex-basis: calc(100% / 4 - (1.5rem * 3 / 4)); } }
-@media (min-width: 1280px) { .product-card-link { flex-basis: calc(100% / 5 - (1.5rem * 4 / 5)); } }
+
+/* --- MEDIA QUERIES --- */
+@media (max-width: 767px) {
+    .product-carousel-container {
+        padding: 0;
+    }
+    
+    .product-swiper {
+        max-width: 22rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-carousel-container .swiper-button-prev,
+    .product-carousel-container .swiper-button-next {
+        display: none;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-container { padding-top: 0; padding-bottom: 3rem; margin-bottom: 0; }
+    .section-title { font-size: 2.25rem; padding-top: 4rem; }
+    .testimonials-title { font-size: 2.5rem; }
+    .testimonials-grid { grid-template-columns: repeat(3, 1fr); gap: 3rem; }
+}

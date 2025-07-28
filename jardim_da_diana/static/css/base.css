@@ -150,7 +150,7 @@ header {
     right: 0;
     width: 300px; /* Largura do menu lateral */
     height: 100%;
-    background-color: var(--color-brand-bg);
+    background-color: var(--color-brand-yellow); /* <<<< COR DE FUNDO ALTERADA */
     z-index: 1000;
     padding: 1.5rem;
     box-shadow: -10px 0px 30px -15px rgba(0,0,0,0.3);
@@ -196,7 +196,7 @@ header {
     border-radius: 8px;
 }
 .mobile-menu-links .nav-link:hover {
-    background-color: var(--color-brand-yellow);
+    background-color: var(--color-brand-bg); /* <<<< COR DO HOVER ALTERADA */
 }
 
 .mobile-user-actions {

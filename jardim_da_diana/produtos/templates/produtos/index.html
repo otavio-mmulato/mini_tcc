@@ -38,12 +38,11 @@
     <main class="main-container">
         <h2 class="section-title">Mais Vendidos</h2>
 
-        <div class="carousel-container">
-            <button id="prev-btn" class="carousel-btn prev">&#10094;</button>
-            <div class="carousel-wrapper">
-                <div id="products-carousel" class="carousel-track">
+        <div class="product-carousel-container">
+            <div class="swiper product-swiper">
+                <div class="swiper-wrapper">
                     {% for produto in produtos %}
-                        <a href="{% url 'produto-detalhe' pk=produto.pk %}" class="product-card-link">
+                        <a href="{% url 'produto-detalhe' pk=produto.pk %}" class="swiper-slide product-card-link">
                             <div class="product-card">
                                 <div class="product-image-wrapper">
                                     {% if produto.imagem %}<img src="{{ produto.imagem.url }}" alt="{{ produto.nome }}">{% endif %}
@@ -57,8 +56,10 @@
                         </a>
                     {% endfor %}
                 </div>
+                <div class="swiper-pagination"></div>
             </div>
-            <button id="next-btn" class="carousel-btn next">&#10095;</button>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
         </div>
     </main>
 
@@ -99,12 +100,12 @@
             </div>
         </div>
     </section>
+    
     {% include 'produtos/footer.html' %}
 
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="{% static 'js/menu.js' %}"></script>
     <script src="{% static 'js/scroll-animation.js' %}"></script>
-    <script src="{% static 'js/carousel.js' %}"></script>
     <script src="{% static 'js/swiper_init.js' %}"></script>
 
 </body>
